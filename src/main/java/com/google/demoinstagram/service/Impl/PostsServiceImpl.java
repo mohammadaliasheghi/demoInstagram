@@ -6,6 +6,7 @@ import com.google.demoinstagram.repository.PostsRepository;
 import com.google.demoinstagram.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,25 +16,41 @@ public class PostsServiceImpl implements PostsService {
 
     private final PostsRepository postsRepository;
 
+    @Transactional
     @Override
-    public Posts savePosts(Posts posts) {
+    public Posts create(Posts posts) {
         return postsRepository.save(posts);
     }
 
+    @Transactional
     @Override
-    public List<Posts> getAllPosts() {
+    public Posts update(Posts posts, Long id) {
+        Posts existPosts = postsRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Posts", "id", id));
+
+        existPosts.setCover(existPosts.getCover());
+        existPosts.setDescription(existPosts.getDescription());
+        existPosts.setUsersId(existPosts.getUsersId());
+        existPosts.setTitle(existPosts.getTitle());
+
+        postsRepository.save(existPosts);
+        return existPosts;
+    }
+
+    @Override
+    public List<Posts> listInfo() {
         return postsRepository.findAll();
     }
 
     @Override
-    public void deletePosts(Long id) {
+    public void delete(Long id) {
         postsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Post", "id", id));
         postsRepository.deleteById(id);
     }
 
     @Override
-    public Posts getPostById(Long id) {
+    public Posts get(Long id) {
         return postsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Posts", "id", id));
     }

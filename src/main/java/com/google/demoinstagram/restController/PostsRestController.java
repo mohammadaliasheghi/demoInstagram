@@ -22,26 +22,33 @@ public class PostsRestController {
 
     // http://localhost:8085/api/posts/create
     @PostMapping(value = "/create")
-    public ResponseEntity<Posts> savePosts(@RequestBody Posts posts) {
-        return new ResponseEntity<>(postsService.savePosts(posts), HttpStatus.CREATED);
+    public ResponseEntity<Posts> create(@RequestBody Posts posts) {
+        return new ResponseEntity<>(postsService.create(posts), HttpStatus.CREATED);
+    }
+
+    // http://localhost:8085/api/posts/update/1
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Posts> update(@PathVariable("id") long id
+            , @RequestBody Posts posts) {
+        return new ResponseEntity<>(postsService.update(posts, id), HttpStatus.OK);
     }
 
     // http://localhost:8085/api/posts
     @GetMapping(value = {"", "/"})
-    public List<Posts> getAllPosts() {
-        return postsService.getAllPosts();
+    public List<Posts> listInfo() {
+        return postsService.listInfo();
     }
 
     // http://localhost:8085/api/posts/delete/1
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<String> deletePosts(@PathVariable("id") Long id) {
-        postsService.deletePosts(id);
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        postsService.delete(id);
         return new ResponseEntity<>("Post deleted successfully!.", HttpStatus.OK);
     }
 
     // http://localhost:8085/api/posts/getPostById/1
     @GetMapping(value = "/getPostById/{id}")
-    public ResponseEntity<Posts> getPostById(@PathVariable("id") long id) {
-        return new ResponseEntity<>(postsService.getPostById(id), HttpStatus.OK);
+    public ResponseEntity<Posts> get(@PathVariable("id") long id) {
+        return new ResponseEntity<>(postsService.get(id), HttpStatus.OK);
     }
 }

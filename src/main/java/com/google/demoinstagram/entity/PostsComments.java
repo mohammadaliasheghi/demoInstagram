@@ -8,28 +8,31 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "POSTS")
+@Table(name = "POSTS_COMMENTS")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Posts.class)
-public class Posts {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = PostsComments.class)
+public class PostsComments {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "TITLE", length = 50)
-    private String title;
+    @NotNull
+    @Column(name = "TEXT", nullable = false)
+    private String text;
 
-    @Column(name = "DESCRIPTION")
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "USERS_ID")
+    private Users usersId;
 
-    @Column(name = "COVER")
-    private String cover;
+    @ManyToOne
+    @JoinColumn(name = "POSTS_ID")
+    private Posts postsId;
 
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
@@ -38,14 +41,4 @@ public class Posts {
     @Column(name = "UPDATE_DATE")
     @UpdateTimestamp
     private Date updateDate;
-
-    @ManyToOne
-    @JoinColumn(name = "USERS_ID")
-    private Users usersId;
-
-    @OneToMany(mappedBy = "postsId")
-    private List<LikePosts> likePosts;
-
-    @OneToMany(mappedBy = "postsId")
-    private List<PostsComments> postsComments;
 }

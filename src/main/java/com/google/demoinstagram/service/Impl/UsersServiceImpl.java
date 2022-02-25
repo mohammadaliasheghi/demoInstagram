@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UsersServiceImpl implements UsersService { 
+public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
     private UsersValidator usersValidator;

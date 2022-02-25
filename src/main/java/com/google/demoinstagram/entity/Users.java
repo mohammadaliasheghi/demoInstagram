@@ -56,4 +56,10 @@ public class Users {
 
     @OneToMany(mappedBy = "usersId")
     private List<Posts> posts;
+
+    @OneToMany(mappedBy = "usersId")
+    private List<LikePosts> likePosts;
+
+    @OneToMany(mappedBy = "usersId")
+    private List<PostsComments> postsComments;
 }

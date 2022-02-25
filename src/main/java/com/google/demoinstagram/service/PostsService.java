@@ -8,11 +8,14 @@ import java.util.List;
 public interface PostsService {
 
     @Transactional
-    Posts savePosts(Posts posts);
+    Posts create(Posts posts);
 
-    List<Posts> getAllPosts();
+    @Transactional
+    Posts update(Posts posts, Long id);
 
-    void deletePosts(Long id);
+    List<Posts> listInfo();
 
-    Posts getPostById(Long id);
+    void delete(Long id);
+
+    Posts get(Long id);
 }
