@@ -28,10 +28,10 @@ public class PostsServiceImpl implements PostsService {
         Posts existPosts = postsRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Posts", "id", id));
 
-        existPosts.setCover(existPosts.getCover());
-        existPosts.setDescription(existPosts.getDescription());
-        existPosts.setUsersId(existPosts.getUsersId());
-        existPosts.setTitle(existPosts.getTitle());
+        existPosts.setCover(posts.getCover());
+        existPosts.setDescription(posts.getDescription());
+        existPosts.setUsersId(posts.getUsersId());
+        existPosts.setTitle(posts.getTitle());
 
         postsRepository.save(existPosts);
         return existPosts;

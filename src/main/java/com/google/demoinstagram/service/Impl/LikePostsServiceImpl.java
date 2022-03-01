@@ -24,4 +24,10 @@ public class LikePostsServiceImpl implements LikePostsService {
                 new ResourceNotFoundException("LikePosts", "Id", id));
         likePostsRepository.deleteById(id);
     }
+
+    @Override
+    public LikePosts get(Long id) {
+        return likePostsRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("LikePosts", "id", id));
+    }
 }

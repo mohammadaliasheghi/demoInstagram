@@ -8,4 +8,6 @@ public interface LikePostsService {
     LikePosts create(LikePosts likePosts);
 
     void delete(long id);
+
+    LikePosts get(Long id);
 }
