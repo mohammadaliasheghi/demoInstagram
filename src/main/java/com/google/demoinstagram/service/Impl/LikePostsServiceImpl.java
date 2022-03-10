@@ -15,7 +15,15 @@ public class LikePostsServiceImpl implements LikePostsService {
 
     @Override
     public LikePosts create(LikePosts likePosts) {
-        return likePostsRepository.save(likePosts);
+        if (likePostsRepository.existsLikePostsByUsersIdAndPostsId(likePosts.getUsersId(), likePosts.getPostsId())) {
+            LikePosts newLikePosts = likePostsRepository.getLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId());
+            if (newLikePosts.getId() != null) {
+                this.delete(newLikePosts.getId());
+            }
+        } else
+            return likePostsRepository.save(likePosts);
+
+        return null;
     }
 
     @Override
@@ -23,11 +31,5 @@ public class LikePostsServiceImpl implements LikePostsService {
         likePostsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("LikePosts", "Id", id));
         likePostsRepository.deleteById(id);
-    }
-
-    @Override
-    public LikePosts get(Long id) {
-        return likePostsRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("LikePosts", "id", id));
     }
 }
