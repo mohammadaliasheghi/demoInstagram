@@ -26,10 +26,12 @@ public class LikePosts {
     @Column(name = "LIKED", nullable = false)
     private Boolean liked = Boolean.FALSE;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
     private Posts postsId;

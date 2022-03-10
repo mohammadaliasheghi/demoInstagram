@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -22,14 +23,16 @@ public class PostsComments {
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "CommentCannotBeNull")
     @Column(name = "TEXT", nullable = false)
     private String text;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
     private Posts postsId;

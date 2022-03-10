@@ -59,7 +59,7 @@ public class UsersRestController {
         // delete user from DB
         usersService.deleteUser(id);
 
-        return new ResponseEntity<>("User deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("UserDeletedSuccessfully!", HttpStatus.OK);
     }
 
 }

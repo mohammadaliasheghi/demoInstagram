@@ -52,6 +52,6 @@ public class PostsCommentsRestController {
         // delete user from DB
         postsCommentsService.delete(id);
 
-        return new ResponseEntity<>("Comment deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("CommentDeletedSuccessfully!", HttpStatus.OK);
     }
 }

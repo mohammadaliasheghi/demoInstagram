@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class Posts {
     @UpdateTimestamp
     private Date updateDate;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
