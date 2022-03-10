@@ -17,7 +17,7 @@ public class LikePostsServiceImpl implements LikePostsService {
     public LikePosts create(LikePosts likePosts) {
         if (likePostsRepository.existsLikePostsByUsersIdAndPostsId(likePosts.getUsersId(), likePosts.getPostsId())) {
             LikePosts newLikePosts = likePostsRepository.getLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId());
-            if (newLikePosts.getId() != null) {
+            if (newLikePosts != null && newLikePosts.getId() != null) {
                 this.delete(newLikePosts.getId());
             }
         } else
