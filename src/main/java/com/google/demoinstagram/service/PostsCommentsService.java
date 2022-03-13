@@ -1,6 +1,7 @@
 package com.google.demoinstagram.service;
 
 import com.google.demoinstagram.entity.PostsComments;
+import com.google.demoinstagram.entity.Users;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface PostsCommentsService {
     PostsComments get(Long id);
 
     List<PostsComments> list();
+
+    List<PostsComments> listInfoCommentPostByPostsId(Long postId) throws Exception;
 }

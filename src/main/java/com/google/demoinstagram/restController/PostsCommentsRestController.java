@@ -54,4 +54,10 @@ public class PostsCommentsRestController {
 
         return new ResponseEntity<>("CommentDeletedSuccessfully!", HttpStatus.OK);
     }
+
+    // http://localhost:8085/api/posts-comments/1
+    @GetMapping(value = {"/{postsId}"})
+    public List<PostsComments> listInfoCommentPostByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
+        return postsCommentsService.listInfoCommentPostByPostsId(postsId);
+    }
 }

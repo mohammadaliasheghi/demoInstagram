@@ -7,6 +7,8 @@ import com.google.demoinstagram.service.LikePostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class LikePostsServiceImpl implements LikePostsService {
@@ -31,5 +33,11 @@ public class LikePostsServiceImpl implements LikePostsService {
         likePostsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("LikePosts", "Id", id));
         likePostsRepository.deleteById(id);
+    }
+
+    public List<LikePosts> listInfoUsersLikedPost(Long postId) throws Exception {
+        if (postId == null)
+            throw new Exception("PostsIdCannotBeNull");
+        return likePostsRepository.getAllByPostsId_Id(postId);
     }
 }
