@@ -1,7 +1,6 @@
 package com.google.demoinstagram.service.Impl;
 
 import com.google.demoinstagram.entity.PostsComments;
-import com.google.demoinstagram.entity.Users;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.repository.PostsCommentsRepository;
 import com.google.demoinstagram.service.PostsCommentsService;
@@ -55,6 +54,7 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
         return postsCommentsRepository.findAll();
     }
 
+    @Override
     public List<PostsComments> listInfoCommentPostByPostsId(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");

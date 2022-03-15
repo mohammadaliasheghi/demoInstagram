@@ -1,7 +1,6 @@
 package com.google.demoinstagram.service;
 
 import com.google.demoinstagram.entity.PostsComments;
-import com.google.demoinstagram.entity.Users;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

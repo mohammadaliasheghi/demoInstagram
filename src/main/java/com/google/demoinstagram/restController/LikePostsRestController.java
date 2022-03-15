@@ -1,7 +1,6 @@
 package com.google.demoinstagram.restController;
 
 import com.google.demoinstagram.entity.LikePosts;
-import com.google.demoinstagram.entity.Users;
 import com.google.demoinstagram.service.LikePostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
