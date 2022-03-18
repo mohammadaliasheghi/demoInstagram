@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface LikePostsRepository extends JpaRepository<LikePosts, Long> {
 
+    //improve performance(using ids)
     boolean existsLikePostsByUsersIdAndPostsId(Users usersId, Posts postsId);
 
     LikePosts getLikePostsByUsersId_IdAndPostsId_Id(Long usersId, Long postsId);

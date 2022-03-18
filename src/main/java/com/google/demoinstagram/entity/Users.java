@@ -62,4 +62,7 @@ public class Users {
 
     @OneToMany(mappedBy = "usersId")
     private List<PostsComments> postsComments;
+
+    @OneToMany(mappedBy = "usersId")
+    private List<LikeComments> likeComments;
 }

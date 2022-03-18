@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,6 +37,9 @@ public class PostsComments {
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
     private Posts postsId;
+
+    @OneToMany(mappedBy = "postsCommentsId")
+    private List<LikeComments> likeComments;
 
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
