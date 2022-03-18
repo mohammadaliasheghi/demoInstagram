@@ -60,4 +60,10 @@ public class PostsCommentsRestController {
     public List<PostsComments> listInfoCommentPostByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
         return postsCommentsService.listInfoCommentPostByPostsId(postsId);
     }
+
+    // http://localhost:8085/api/posts-comments/count-all-comment/1
+    @GetMapping(value = {"/count-all-comment/{postsId}"})
+    public Long countAllCommentByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
+        return postsCommentsService.countAllCommentByPostsId(postsId);
+    }
 }

@@ -22,8 +22,12 @@ public class LikePostsServiceImpl implements LikePostsService {
             if (newLikePosts != null && newLikePosts.getId() != null) {
                 this.delete(newLikePosts.getId());
             }
-        } else
-            return likePostsRepository.save(likePosts);
+        } else {
+            if (likePosts.getLiked().equals(true))
+                return likePostsRepository.save(likePosts);
+            else
+                return null;
+        }
 
         return null;
     }
@@ -35,9 +39,17 @@ public class LikePostsServiceImpl implements LikePostsService {
         likePostsRepository.deleteById(id);
     }
 
+    @Override
     public List<LikePosts> listInfoUsersLikedPost(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");
         return likePostsRepository.getAllByPostsId_Id(postId);
+    }
+
+    @Override
+    public Long countAllLikeByPostsId(Long postId) throws Exception {
+        if (postId == null)
+            throw new Exception("PostsIdCannotBeNull");
+        return likePostsRepository.countAllByPostsId_Id(postId);
     }
 }

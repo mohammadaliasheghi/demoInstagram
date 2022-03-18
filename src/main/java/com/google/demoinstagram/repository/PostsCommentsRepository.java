@@ -10,4 +10,6 @@ import java.util.List;
 public interface PostsCommentsRepository extends JpaRepository<PostsComments, Long> {
 
     List<PostsComments> getAllByPostsId_Id(Long postsId);
+
+    Long countAllByPostsId_Id(Long id);
 }

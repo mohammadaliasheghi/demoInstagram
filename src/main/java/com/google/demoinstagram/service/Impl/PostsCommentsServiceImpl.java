@@ -60,4 +60,11 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
             throw new Exception("PostsIdCannotBeNull");
         return postsCommentsRepository.getAllByPostsId_Id(postId);
     }
+
+    @Override
+    public Long countAllCommentByPostsId(Long postId) throws Exception {
+        if (postId == null)
+            throw new Exception("PostsIdCannotBeNull");
+        return postsCommentsRepository.countAllByPostsId_Id(postId);
+    }
 }

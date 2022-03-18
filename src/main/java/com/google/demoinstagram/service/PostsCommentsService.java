@@ -20,4 +20,6 @@ public interface PostsCommentsService {
     List<PostsComments> list();
 
     List<PostsComments> listInfoCommentPostByPostsId(Long postId) throws Exception;
+
+    Long countAllCommentByPostsId(Long postId) throws Exception;
 }
