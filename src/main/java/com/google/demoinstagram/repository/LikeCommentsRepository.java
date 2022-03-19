@@ -15,7 +15,7 @@ public interface LikeCommentsRepository extends JpaRepository<LikeComments, Long
 
     LikeComments getLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(Long postsCommentsId, Long usersId, Long postsId);
 
-    Long countAllByPostsCommentsId_IdAndPostsId_Id(Long postsCommentsId, Long postsId);
+    Long countAllByPostsCommentsId_Id(Long postsCommentsId);
 
     @Query("select lc.usersId.username from LikeComments lc " +
             "left join PostsComments pc on pc.id = lc.postsCommentsId.id " +

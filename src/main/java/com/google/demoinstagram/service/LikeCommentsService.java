@@ -12,7 +12,7 @@ public interface LikeCommentsService {
 
     void delete(long id);
 
-    Long countAllLikeCommentsByPostsCommentsIdAndPostsId(Long postsCommentsId, Long postsId) throws Exception;
+    Long countAllLikeCommentsByPostsCommentsId(Long postsCommentsId) throws Exception;
 
     List<String> getAllUsernameLikedCommentsByPostCommentId(Long postsCommentsId) throws Exception;
 }
