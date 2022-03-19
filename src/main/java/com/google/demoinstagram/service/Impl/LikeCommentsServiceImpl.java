@@ -17,8 +17,8 @@ public class LikeCommentsServiceImpl implements LikeCommentsService {
     @Transactional
     @Override
     public LikeComments create(LikeComments likeComments) {
-        if (likeCommentsRepository.existsLikeCommentsByPostsCommentsIdAndUsersIdAndPostsId(likeComments.getPostsCommentsId(),
-                likeComments.getUsersId(), likeComments.getPostsId())) {
+        if (likeCommentsRepository.existsLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(likeComments.getPostsCommentsId().getId(),
+                likeComments.getUsersId().getId(), likeComments.getPostsId().getId())) {
             LikeComments newLikePosts = likeCommentsRepository.getLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(likeComments.getPostsCommentsId().getId(),
                     likeComments.getUsersId().getId(), likeComments.getPostsId().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
