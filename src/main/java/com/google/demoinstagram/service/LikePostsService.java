@@ -14,4 +14,6 @@ public interface LikePostsService {
     List<LikePosts> listInfoUsersLikedPost(Long postId) throws Exception;
 
     Long countAllLikeByPostsId(Long postId) throws Exception;
+
+    List<String> getAllUsernameLikedPostByPostId(Long postId) throws Exception;
 }

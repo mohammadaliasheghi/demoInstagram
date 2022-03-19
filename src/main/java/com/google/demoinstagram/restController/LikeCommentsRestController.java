@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/like-comments")
 public class LikeCommentsRestController {
@@ -29,5 +31,11 @@ public class LikeCommentsRestController {
     public Long countAllLikeByPostsId(@PathVariable("postsCommentsId") Long postsCommentsId,
                                       @PathVariable("postsId") Long postsId) throws Exception {
         return likeCommentsService.countAllLikeCommentsByPostsCommentsIdAndPostsId(postsCommentsId, postsId);
+    }
+
+    // http://localhost:8085/api/like-comments/get-all-username-liked-comment/1
+    @GetMapping(value = {"/get-all-username-liked-comment/{postsCommentsId}"})
+    public List<String> getAllUsernameLikedCommentsByPostsCommentsId(@PathVariable("postsCommentsId") Long postsCommentsId) throws Exception {
+        return likeCommentsService.getAllUsernameLikedCommentsByPostCommentId(postsCommentsId);
     }
 }

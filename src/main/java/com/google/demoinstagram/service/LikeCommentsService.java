@@ -3,6 +3,8 @@ package com.google.demoinstagram.service;
 import com.google.demoinstagram.entity.LikeComments;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface LikeCommentsService {
 
     @Transactional
@@ -11,4 +13,6 @@ public interface LikeCommentsService {
     void delete(long id);
 
     Long countAllLikeCommentsByPostsCommentsIdAndPostsId(Long postsCommentsId, Long postsId) throws Exception;
+
+    List<String> getAllUsernameLikedCommentsByPostCommentId(Long postsCommentsId) throws Exception;
 }

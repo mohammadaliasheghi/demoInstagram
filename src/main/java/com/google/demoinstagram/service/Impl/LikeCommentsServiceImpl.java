@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class LikeCommentsServiceImpl implements LikeCommentsService {
@@ -46,5 +48,12 @@ public class LikeCommentsServiceImpl implements LikeCommentsService {
         if (postsCommentsId == null || postsId == null)
             throw new Exception("likeCommentsCannotBeNull");
         return likeCommentsRepository.countAllByPostsCommentsId_IdAndPostsId_Id(postsCommentsId, postsId);
+    }
+
+    @Override
+    public List<String> getAllUsernameLikedCommentsByPostCommentId(Long postsCommentsId) throws Exception {
+        if (postsCommentsId == null)
+            throw new Exception("likeCommentsCannotBeNull");
+        return likeCommentsRepository.findAllUsernameLikedCommentsByPostCommentId(postsCommentsId);
     }
 }

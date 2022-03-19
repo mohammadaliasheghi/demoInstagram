@@ -52,4 +52,11 @@ public class LikePostsServiceImpl implements LikePostsService {
             throw new Exception("PostsIdCannotBeNull");
         return likePostsRepository.countAllByPostsId_Id(postId);
     }
+
+    @Override
+    public List<String> getAllUsernameLikedPostByPostId(Long postId) throws Exception {
+        if (postId == null)
+            throw new Exception("PostsIdCannotBeNull");
+        return likePostsRepository.findAllUsernameLikedPostByPostId(postId);
+    }
 }

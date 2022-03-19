@@ -37,4 +37,10 @@ public class LikePostsRestController {
     public Long countAllLikeByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
         return likePostsService.countAllLikeByPostsId(postsId);
     }
+
+    // http://localhost:8085/api/like-post/get-all-username-liked-post/1
+    @GetMapping(value = {"/get-all-username-liked-post/{postsId}"})
+    public List<String> getAllUsernameLikedPostByPostId(@PathVariable("postsId") Long postsId) throws Exception {
+        return likePostsService.getAllUsernameLikedPostByPostId(postsId);
+    }
 }

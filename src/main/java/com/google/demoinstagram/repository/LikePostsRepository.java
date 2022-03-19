@@ -2,6 +2,8 @@ package com.google.demoinstagram.repository;
 
 import com.google.demoinstagram.entity.LikePosts;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +18,9 @@ public interface LikePostsRepository extends JpaRepository<LikePosts, Long> {
     List<LikePosts> getAllByPostsId_Id(Long postsId);
 
     Long countAllByPostsId_Id(Long postsId);
+
+    @Query("select lp.usersId.username from LikePosts lp " +
+            "left join Posts p on p.id = lp.postsId.id " +
+            "where p.id = :id")
+    List<String> findAllUsernameLikedPostByPostId(@Param("id") Long id);
 }
