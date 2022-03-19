@@ -44,7 +44,7 @@ public class LikeCommentsServiceImpl implements LikeCommentsService {
     @Override
     public Long countAllLikeCommentsByPostsCommentsIdAndPostsId(Long postsCommentsId, Long postsId) throws Exception {
         if (postsCommentsId == null || postsId == null)
-            throw new Exception("PostsCommentsCannotBeNull");
+            throw new Exception("likeCommentsCannotBeNull");
         return likeCommentsRepository.countAllByPostsCommentsId_IdAndPostsId_Id(postsCommentsId, postsId);
     }
 }
