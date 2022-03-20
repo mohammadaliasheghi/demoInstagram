@@ -53,4 +53,7 @@ public class Posts {
 
     @OneToMany(mappedBy = "postsId")
     private List<LikeComments> likeComments;
+
+    @OneToMany(mappedBy = "postsId")
+    private List<SavedPosts> savedPosts;
 }
