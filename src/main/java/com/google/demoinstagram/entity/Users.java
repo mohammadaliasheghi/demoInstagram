@@ -68,4 +68,10 @@ public class Users {
 
     @OneToMany(mappedBy = "usersId")
     private List<SavedPosts> savedPosts;
+
+    @OneToMany(mappedBy = "follower")
+    private List<FollowUsers> followers;
+
+    @OneToMany(mappedBy = "following")
+    private List<FollowUsers> followings;
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -44,8 +43,4 @@ public class LikeComments {
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
     private Date createDate;
-
-    @Column(name = "UPDATE_DATE")
-    @UpdateTimestamp
-    private Date updateDate;
 }

@@ -12,28 +12,24 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "LIKE_POSTS")
+@Table(name = "FOLLOW_USERS")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = LikePosts.class)
-public class LikePosts {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = FollowUsers.class)
+public class FollowUsers {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
-    @Column(name = "LIKED", nullable = false)
-    private Boolean liked = Boolean.FALSE;
+    @ManyToOne
+    @JoinColumn(name = "FOLLOWER")
+    private Users follower;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "USERS_ID")
-    private Users usersId;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "POSTS_ID")
-    private Posts postsId;
+    @JoinColumn(name = "FOLLOWING")
+    private Users following;
 
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
