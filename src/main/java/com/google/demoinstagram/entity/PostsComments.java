@@ -38,7 +38,7 @@ public class PostsComments {
     @JoinColumn(name = "POSTS_ID")
     private Posts postsId;
 
-    @OneToMany(mappedBy = "postsCommentsId")
+    @OneToMany(mappedBy = "postsCommentsId", cascade = CascadeType.ALL)
     private List<LikeComments> likeComments;
 
     @Column(name = "CREATE_DATE", updatable = false)

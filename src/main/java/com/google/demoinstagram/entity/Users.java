@@ -54,24 +54,24 @@ public class Users {
     @UpdateTimestamp
     private Date updateDate;
 
-    @OneToMany(mappedBy = "usersId")
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<Posts> posts;
 
-    @OneToMany(mappedBy = "usersId")
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<LikePosts> likePosts;
 
-    @OneToMany(mappedBy = "usersId")
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<PostsComments> postsComments;
 
-    @OneToMany(mappedBy = "usersId")
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<LikeComments> likeComments;
 
-    @OneToMany(mappedBy = "usersId")
+    @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<SavedPosts> savedPosts;
 
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL)
     private List<FollowUsers> followers;
 
-    @OneToMany(mappedBy = "following")
+    @OneToMany(mappedBy = "following", cascade = CascadeType.ALL)
     private List<FollowUsers> followings;
 }

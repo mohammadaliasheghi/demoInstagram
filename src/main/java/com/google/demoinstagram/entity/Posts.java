@@ -45,15 +45,15 @@ public class Posts {
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
 
-    @OneToMany(mappedBy = "postsId")
+    @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)
     private List<LikePosts> likePosts;
 
-    @OneToMany(mappedBy = "postsId")
+    @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)
     private List<PostsComments> postsComments;
 
-    @OneToMany(mappedBy = "postsId")
+    @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)
     private List<LikeComments> likeComments;
 
-    @OneToMany(mappedBy = "postsId")
+    @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)
     private List<SavedPosts> savedPosts;
 }
