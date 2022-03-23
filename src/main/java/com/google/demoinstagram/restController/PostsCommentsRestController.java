@@ -52,7 +52,7 @@ public class PostsCommentsRestController {
         // delete user from DB
         postsCommentsService.delete(id);
 
-        return new ResponseEntity<>("CommentDeletedSuccessfully!", HttpStatus.OK);
+        return new ResponseEntity<>("Comment Deleted Successfully!", HttpStatus.OK);
     }
 
     // http://localhost:8085/api/posts-comments/1

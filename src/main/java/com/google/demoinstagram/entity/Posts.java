@@ -45,6 +45,10 @@ public class Posts {
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
 
+    @ManyToMany
+    @JoinTable(name = "POSTS_TAGS")
+    private List<HashTag> hashTags;
+
     @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)
     private List<LikePosts> likePosts;
 

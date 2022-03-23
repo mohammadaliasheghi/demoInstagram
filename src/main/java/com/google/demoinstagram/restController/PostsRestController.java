@@ -43,7 +43,7 @@ public class PostsRestController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         postsService.delete(id);
-        return new ResponseEntity<>("PostDeletedSuccessfully!", HttpStatus.OK);
+        return new ResponseEntity<>("Post Deleted Successfully!", HttpStatus.OK);
     }
 
     // http://localhost:8085/api/posts/getPostById/1
