@@ -54,4 +54,11 @@ public class PostsServiceImpl implements PostsService {
         return postsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Posts", "id", id));
     }
+
+    @Override
+    public List<Posts> getAllFollowingPostsByUserId(Long userId) throws Exception {
+        if (userId == null)
+            throw new Exception("UsersIdCannotBeNull");
+        return postsRepository.getAllFollowingPostsByUserId(userId);
+    }
 }

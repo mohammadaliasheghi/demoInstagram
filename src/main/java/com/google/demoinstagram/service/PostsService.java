@@ -18,4 +18,6 @@ public interface PostsService {
     void delete(Long id);
 
     Posts get(Long id);
+
+    List<Posts> getAllFollowingPostsByUserId(Long userId) throws Exception;
 }

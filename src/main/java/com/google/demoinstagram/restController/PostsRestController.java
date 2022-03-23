@@ -51,4 +51,10 @@ public class PostsRestController {
     public ResponseEntity<Posts> get(@PathVariable("id") long id) {
         return new ResponseEntity<>(postsService.get(id), HttpStatus.OK);
     }
+
+    // http://localhost:8085/api/posts/get-all-following-posts/1
+    @GetMapping(value = {"/get-all-following-posts/{userId}"})
+    public List<Posts> getAllFollowingPostsByUserId(@PathVariable("userId") Long userId) throws Exception {
+        return postsService.getAllFollowingPostsByUserId(userId);
+    }
 }
