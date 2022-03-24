@@ -28,7 +28,7 @@ public class PostsRestController {
 
     // http://localhost:8085/api/posts/update/1
     @PutMapping("/update/{id}")
-    public ResponseEntity<Posts> update(@PathVariable("id") long id
+    public ResponseEntity<Posts> update(@PathVariable("id") Long id
             , @RequestBody Posts posts) {
         return new ResponseEntity<>(postsService.update(posts, id), HttpStatus.OK);
     }
@@ -48,7 +48,7 @@ public class PostsRestController {
 
     // http://localhost:8085/api/posts/getPostById/1
     @GetMapping(value = "/getPostById/{id}")
-    public ResponseEntity<Posts> get(@PathVariable("id") long id) {
+    public ResponseEntity<Posts> get(@PathVariable("id") Long id) {
         return new ResponseEntity<>(postsService.get(id), HttpStatus.OK);
     }
 
@@ -56,5 +56,11 @@ public class PostsRestController {
     @GetMapping(value = {"/get-all-following-posts/{userId}"})
     public List<Posts> getAllFollowingPostsByUserId(@PathVariable("userId") Long userId) throws Exception {
         return postsService.getAllFollowingPostsByUserId(userId);
+    }
+
+    // http://localhost:8085/api/posts/get-all-posts-by-hashTag/sport
+    @GetMapping(value = {"/get-all-posts-by-hashTag/{hashTag}"})
+    public List<Posts> getAllPostsByHashTag(@PathVariable("hashTag") String hashTag) throws Exception {
+        return postsService.getAllPostsByHashTag(hashTag);
     }
 }

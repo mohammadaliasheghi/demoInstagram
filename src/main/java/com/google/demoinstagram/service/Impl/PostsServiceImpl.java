@@ -61,4 +61,11 @@ public class PostsServiceImpl implements PostsService {
             throw new Exception("UsersIdCannotBeNull");
         return postsRepository.getAllFollowingPostsByUserId(userId);
     }
+
+    @Override
+    public List<Posts> getAllPostsByHashTag(String hashTag) throws Exception {
+        if (hashTag == null || hashTag.length() == 0)
+            throw new Exception("HashTagCannotBeNull");
+        return postsRepository.getAllPostsByHashTag(hashTag);
+    }
 }

@@ -20,4 +20,6 @@ public interface PostsService {
     Posts get(Long id);
 
     List<Posts> getAllFollowingPostsByUserId(Long userId) throws Exception;
+
+    List<Posts> getAllPostsByHashTag(String hashTag) throws Exception;
 }

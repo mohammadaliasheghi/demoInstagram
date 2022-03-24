@@ -13,4 +13,7 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
             "where p.usersId.id in " +
             "(select fu.following.id from FollowUsers fu where fu.follower.id = :id)")
     List<Posts> getAllFollowingPostsByUserId(@Param("id") Long id);
+
+    @Query("select p from Posts p join p.hashTags h where upper(h.text) = upper(:hashTagText)")
+    List<Posts> getAllPostsByHashTag(@Param("hashTagText") String hashTagText);
 }
