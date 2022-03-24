@@ -63,4 +63,11 @@ public class PostsRestController {
     public List<Posts> getAllPostsByHashTag(@PathVariable("hashTag") String hashTag) throws Exception {
         return postsService.getAllPostsByHashTag(hashTag);
     }
+
+    // http://localhost:8085/api/posts/delete-all-posts-by-hashTag/sport
+    @DeleteMapping(value = "/delete-all-posts-by-hashTag/{hashTag}")
+    public ResponseEntity<String> deleteAllPostsByHashTag(@PathVariable("hashTag") String hashTag) throws Exception {
+        postsService.deleteAllPostsByHashTag(hashTag);
+        return new ResponseEntity<>("Posts Deleted Successfully!", HttpStatus.OK);
+    }
 }

@@ -68,4 +68,12 @@ public class PostsServiceImpl implements PostsService {
             throw new Exception("HashTagCannotBeNull");
         return postsRepository.getAllPostsByHashTag(hashTag);
     }
+
+    @Override
+    public void deleteAllPostsByHashTag(String hashTag) throws Exception {
+        if (hashTag == null || hashTag.length() == 0)
+            throw new Exception("HashTagCannotBeNull");
+        List<Posts> posts = postsRepository.getAllPostsByHashTag(hashTag);
+        postsRepository.deleteAll(posts);
+    }
 }

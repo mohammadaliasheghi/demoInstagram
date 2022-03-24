@@ -22,4 +22,6 @@ public interface PostsService {
     List<Posts> getAllFollowingPostsByUserId(Long userId) throws Exception;
 
     List<Posts> getAllPostsByHashTag(String hashTag) throws Exception;
+
+    void deleteAllPostsByHashTag(String hashTag) throws Exception;
 }
