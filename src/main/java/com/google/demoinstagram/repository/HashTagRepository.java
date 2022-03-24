@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface HashTagRepository extends JpaRepository<HashTag, Long> {
 
     boolean existsHashTagByText(String hashTag);
+
+    HashTag getHashTagByText(String hashTag);
 }

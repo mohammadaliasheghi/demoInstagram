@@ -18,4 +18,8 @@ public interface HashTagService {
     HashTag update(HashTag hashTag, Long id) throws Exception;
 
     void delete(Long id);
+
+    HashTag getHashTagByText(String hashTag);
+
+    void deleteHashTagByText(String hashTagText);
 }

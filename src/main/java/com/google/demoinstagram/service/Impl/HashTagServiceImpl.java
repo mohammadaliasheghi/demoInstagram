@@ -56,4 +56,18 @@ public class HashTagServiceImpl implements HashTagService {
                 new ResourceNotFoundException("HashTag", "id", id));
         hashTagRepository.deleteById(id);
     }
+
+    @Override
+    public HashTag getHashTagByText(String hashTag) {
+        if (hashTagRepository.existsHashTagByText(hashTag))
+            return hashTagRepository.getHashTagByText(hashTag);
+        else
+            return null;
+    }
+
+    @Override
+    public void deleteHashTagByText(String hashTagText) {
+        HashTag hashTag = hashTagRepository.getHashTagByText(hashTagText);
+        hashTagRepository.deleteById(hashTag.getId());
+    }
 }

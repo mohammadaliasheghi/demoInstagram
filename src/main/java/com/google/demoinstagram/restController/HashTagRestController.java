@@ -51,4 +51,17 @@ public class HashTagRestController {
         hashTagService.delete(id);
         return new ResponseEntity<>("HashTag Deleted Successfully!", HttpStatus.OK);
     }
+
+    // http://localhost:8085/api/hash-tag/get-by-text/sport
+    @GetMapping("/get-by-text/{hashTag}")
+    public ResponseEntity<HashTag> getHashTagByText(@PathVariable("hashTag") String hashTag) {
+        return new ResponseEntity<>(hashTagService.getHashTagByText(hashTag), HttpStatus.OK);
+    }
+
+    // http://localhost:8085/api/hash-tag/delete-by-text/sport
+    @DeleteMapping("/delete-by-text/{hashTag}")
+    public ResponseEntity<String> deleteHashTagByText(@PathVariable("hashTag") String hashTag) {
+        hashTagService.deleteHashTagByText(hashTag);
+        return new ResponseEntity<>("HashTag Deleted Successfully!", HttpStatus.OK);
+    }
 }
