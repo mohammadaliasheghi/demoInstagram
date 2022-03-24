@@ -2,9 +2,11 @@ package com.google.demoinstagram.service.Impl;
 
 import com.google.demoinstagram.entity.HashTag;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
+import com.google.demoinstagram.excption.service.HashTagValidator;
 import com.google.demoinstagram.repository.HashTagRepository;
 import com.google.demoinstagram.service.HashTagService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +16,16 @@ import java.util.List;
 public class HashTagServiceImpl implements HashTagService {
 
     private final HashTagRepository hashTagRepository;
+    private HashTagValidator hashTagValidator;
+
+    @Autowired
+    public void setHashTagValidator(HashTagValidator hashTagValidator) {
+        this.hashTagValidator = hashTagValidator;
+    }
 
     @Override
-    public HashTag add(HashTag hashTag) {
+    public HashTag add(HashTag hashTag) throws Exception {
+        hashTagValidator.validate(hashTag);
         return hashTagRepository.save(hashTag);
     }
 
@@ -32,7 +41,8 @@ public class HashTagServiceImpl implements HashTagService {
     }
 
     @Override
-    public HashTag update(HashTag hashTag, Long id) {
+    public HashTag update(HashTag hashTag, Long id) throws Exception {
+        hashTagValidator.validate(hashTag);
         HashTag existHashTag = hashTagRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("HashTag", "id", id));
         existHashTag.setText(hashTag.getText());

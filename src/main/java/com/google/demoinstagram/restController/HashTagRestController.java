@@ -22,7 +22,7 @@ public class HashTagRestController {
 
     // http://localhost:8085/api/hash-tag/add
     @PostMapping(value = "/add")
-    public ResponseEntity<HashTag> add(@RequestBody HashTag hashTag) {
+    public ResponseEntity<HashTag> add(@RequestBody HashTag hashTag) throws Exception {
         return new ResponseEntity<>(hashTagService.add(hashTag), HttpStatus.CREATED);
     }
 
@@ -41,7 +41,7 @@ public class HashTagRestController {
     // http://localhost:8085/api/hash-tag/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<HashTag> update(@PathVariable("id") Long id
-            , @RequestBody HashTag hashTag) {
+            , @RequestBody HashTag hashTag) throws Exception {
         return new ResponseEntity<>(hashTagService.update(hashTag, id), HttpStatus.OK);
     }
 
