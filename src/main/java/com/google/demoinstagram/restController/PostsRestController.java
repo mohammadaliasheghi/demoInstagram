@@ -22,14 +22,14 @@ public class PostsRestController {
 
     // http://localhost:8085/demoInstagram/api/posts/create
     @PostMapping(value = "/create")
-    public ResponseEntity<Posts> create(@RequestBody Posts posts) {
+    public ResponseEntity<Posts> create(@RequestBody Posts posts) throws Exception {
         return new ResponseEntity<>(postsService.create(posts), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/posts/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<Posts> update(@PathVariable("id") Long id
-            , @RequestBody Posts posts) {
+            , @RequestBody Posts posts) throws Exception {
         return new ResponseEntity<>(postsService.update(posts, id), HttpStatus.OK);
     }
 

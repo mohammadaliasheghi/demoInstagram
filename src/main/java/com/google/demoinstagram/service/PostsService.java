@@ -8,10 +8,10 @@ import java.util.List;
 public interface PostsService {
 
     @Transactional
-    Posts create(Posts posts);
+    Posts create(Posts posts) throws Exception;
 
     @Transactional
-    Posts update(Posts posts, Long id);
+    Posts update(Posts posts, Long id) throws Exception;
 
     List<Posts> listInfo();
 
