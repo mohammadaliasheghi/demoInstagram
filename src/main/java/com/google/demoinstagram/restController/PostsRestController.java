@@ -20,51 +20,51 @@ public class PostsRestController {
         this.postsService = postsService;
     }
 
-    // http://localhost:8085/api/posts/create
+    // http://localhost:8085/demoInstagram/api/posts/create
     @PostMapping(value = "/create")
     public ResponseEntity<Posts> create(@RequestBody Posts posts) {
         return new ResponseEntity<>(postsService.create(posts), HttpStatus.CREATED);
     }
 
-    // http://localhost:8085/api/posts/update/1
+    // http://localhost:8085/demoInstagram/api/posts/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<Posts> update(@PathVariable("id") Long id
             , @RequestBody Posts posts) {
         return new ResponseEntity<>(postsService.update(posts, id), HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts
+    // http://localhost:8085/demoInstagram/api/posts
     @GetMapping(value = {"", "/"})
     public List<Posts> listInfo() {
         return postsService.listInfo();
     }
 
-    // http://localhost:8085/api/posts/delete/1
+    // http://localhost:8085/demoInstagram/api/posts/delete/1
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         postsService.delete(id);
         return new ResponseEntity<>("Post Deleted Successfully!", HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts/getPostById/1
+    // http://localhost:8085/demoInstagram/api/posts/getPostById/1
     @GetMapping(value = "/getPostById/{id}")
     public ResponseEntity<Posts> get(@PathVariable("id") Long id) {
         return new ResponseEntity<>(postsService.get(id), HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts/get-all-following-posts/1
+    // http://localhost:8085/demoInstagram/api/posts/get-all-following-posts/1
     @GetMapping(value = {"/get-all-following-posts/{userId}"})
     public List<Posts> getAllFollowingPostsByUserId(@PathVariable("userId") Long userId) throws Exception {
         return postsService.getAllFollowingPostsByUserId(userId);
     }
 
-    // http://localhost:8085/api/posts/get-all-posts-by-hashTag/sport
+    // http://localhost:8085/demoInstagram/api/posts/get-all-posts-by-hashTag/sport
     @GetMapping(value = {"/get-all-posts-by-hashTag/{hashTag}"})
     public List<Posts> getAllPostsByHashTag(@PathVariable("hashTag") String hashTag) throws Exception {
         return postsService.getAllPostsByHashTag(hashTag);
     }
 
-    // http://localhost:8085/api/posts/delete-all-posts-by-hashTag/sport
+    // http://localhost:8085/demoInstagram/api/posts/delete-all-posts-by-hashTag/sport
     @DeleteMapping(value = "/delete-all-posts-by-hashTag/{hashTag}")
     public ResponseEntity<String> deleteAllPostsByHashTag(@PathVariable("hashTag") String hashTag) throws Exception {
         postsService.deleteAllPostsByHashTag(hashTag);

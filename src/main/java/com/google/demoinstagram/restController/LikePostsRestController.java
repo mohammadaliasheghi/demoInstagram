@@ -20,25 +20,25 @@ public class LikePostsRestController {
         this.likePostsService = likePostsService;
     }
 
-    // http://localhost:8085/api/like-post/create
+    // http://localhost:8085/demoInstagram/api/like-post/create
     @PostMapping(value = "/create")
     public ResponseEntity<LikePosts> create(@RequestBody LikePosts likePosts) {
         return new ResponseEntity<>(likePostsService.create(likePosts), HttpStatus.CREATED);
     }
 
-    // http://localhost:8085/api/like-post/1
+    // http://localhost:8085/demoInstagram/api/like-post/1
     @GetMapping(value = {"/{postsId}"})
     public List<LikePosts> listInfoUsersLikedPost(@PathVariable("postsId") Long postsId) throws Exception {
         return likePostsService.listInfoUsersLikedPost(postsId);
     }
 
-    // http://localhost:8085/api/like-post/count-all-like/1
+    // http://localhost:8085/demoInstagram/api/like-post/count-all-like/1
     @GetMapping(value = {"/count-all-like/{postsId}"})
     public Long countAllLikeByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
         return likePostsService.countAllLikeByPostsId(postsId);
     }
 
-    // http://localhost:8085/api/like-post/get-all-username-liked-post/1
+    // http://localhost:8085/demoInstagram/api/like-post/get-all-username-liked-post/1
     @GetMapping(value = {"/get-all-username-liked-post/{postsId}"})
     public List<String> getAllUsernameLikedPostByPostId(@PathVariable("postsId") Long postsId) throws Exception {
         return likePostsService.getAllUsernameLikedPostByPostId(postsId);

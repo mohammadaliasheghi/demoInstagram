@@ -20,32 +20,32 @@ public class PostsCommentsRestController {
         this.postsCommentsService = postsCommentsService;
     }
 
-    // http://localhost:8085/api/posts-comments/add
+    // http://localhost:8085/demoInstagram/api/posts-comments/add
     @PostMapping(value = "/add")
     public ResponseEntity<PostsComments> save(@RequestBody PostsComments postsComments) {
         return new ResponseEntity<>(postsCommentsService.add(postsComments), HttpStatus.CREATED);
     }
 
-    // http://localhost:8085/api/posts-comments/
+    // http://localhost:8085/demoInstagram/api/posts-comments/
     @GetMapping(value = {"/", ""})
     public List<PostsComments> listInfo() {
         return postsCommentsService.list();
     }
 
-    // http://localhost:8085/api/posts-comments/get/1
+    // http://localhost:8085/demoInstagram/api/posts-comments/get/1
     @GetMapping("/get/{id}")
     public ResponseEntity<PostsComments> get(@PathVariable("id") long userId) {
         return new ResponseEntity<>(postsCommentsService.get(userId), HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts-comments/update/1
+    // http://localhost:8085/demoInstagram/api/posts-comments/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<PostsComments> update(@PathVariable("id") long id
             , @RequestBody PostsComments postsComments) {
         return new ResponseEntity<>(postsCommentsService.update(postsComments, id), HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts-comments/delete/1
+    // http://localhost:8085/demoInstagram/api/posts-comments/delete/1
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") long id) {
 
@@ -55,13 +55,13 @@ public class PostsCommentsRestController {
         return new ResponseEntity<>("Comment Deleted Successfully!", HttpStatus.OK);
     }
 
-    // http://localhost:8085/api/posts-comments/1
+    // http://localhost:8085/demoInstagram/api/posts-comments/1
     @GetMapping(value = {"/{postsId}"})
     public List<PostsComments> listInfoCommentPostByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
         return postsCommentsService.listInfoCommentPostByPostsId(postsId);
     }
 
-    // http://localhost:8085/api/posts-comments/count-all-comment/1
+    // http://localhost:8085/demoInstagram/api/posts-comments/count-all-comment/1
     @GetMapping(value = {"/count-all-comment/{postsId}"})
     public Long countAllCommentByPostsId(@PathVariable("postsId") Long postsId) throws Exception {
         return postsCommentsService.countAllCommentByPostsId(postsId);
