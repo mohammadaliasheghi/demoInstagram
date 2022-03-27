@@ -25,10 +25,12 @@ public class PostsValidator {
 
     private void validateHashTagId(Posts posts) throws Exception {
         List<HashTag> hashTag = hashTagService.listInfo();
-        for (HashTag h : hashTag) {
-            if (posts.getHashTags().get(0).getId().compareTo(h.getId()) == 0)
-                return;
+        if (posts.getHashTags() != null && posts.getHashTags().get(0) != null && posts.getHashTags().get(0).getId() != null) {
+            for (HashTag h : hashTag) {
+                if (posts.getHashTags().get(0).getId().compareTo(h.getId()) == 0)
+                    return;
+            }
+            throw new Exception("HashTagIdNotFound");
         }
-        throw new Exception("HashTagIdNotFound");
     }
 }

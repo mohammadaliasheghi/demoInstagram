@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface LikePostsService {
     @Transactional
-    LikePosts create(LikePosts likePosts);
+    LikePosts create(LikePosts likePosts) throws Exception;
 
     void delete(long id);
 

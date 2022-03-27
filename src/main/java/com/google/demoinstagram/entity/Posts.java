@@ -32,6 +32,10 @@ public class Posts {
     @Column(name = "COVER")
     private String cover;
 
+    @NotNull
+    @Column(name = "COUNT_LIKE")
+    private Long countLike = 0L;
+
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
     private Date createDate;

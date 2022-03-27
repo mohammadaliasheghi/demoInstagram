@@ -1,9 +1,11 @@
 package com.google.demoinstagram.service.Impl;
 
 import com.google.demoinstagram.entity.LikePosts;
+import com.google.demoinstagram.entity.Posts;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.repository.LikePostsRepository;
 import com.google.demoinstagram.service.LikePostsService;
+import com.google.demoinstagram.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +16,27 @@ import java.util.List;
 public class LikePostsServiceImpl implements LikePostsService {
 
     private final LikePostsRepository likePostsRepository;
+    private final PostsService postsService;
 
     @Override
-    public LikePosts create(LikePosts likePosts) {
+    public LikePosts create(LikePosts likePosts) throws Exception {
         if (likePostsRepository.existsLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId())) {
             LikePosts newLikePosts = likePostsRepository.getLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
+                Posts posts = postsService.get(likePosts.getPostsId().getId());
+                Long countLikePosts = posts.getCountLike() - 1;
+                posts.setCountLike(countLikePosts);
+                postsService.updateCountLike(posts, likePosts.getPostsId().getId());
                 this.delete(newLikePosts.getId());
             }
         } else {
-            if (likePosts.getLiked().equals(true))
+            if (likePosts.getLiked().equals(true)) {
+                Posts posts = postsService.get(likePosts.getPostsId().getId());
+                Long countLikePosts = posts.getCountLike() + 1;
+                posts.setCountLike(countLikePosts);
+                postsService.updateCountLike(posts, likePosts.getPostsId().getId());
                 return likePostsRepository.save(likePosts);
-            else
+            } else
                 return null;
         }
 

@@ -4,7 +4,6 @@ import com.google.demoinstagram.entity.Posts;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.excption.service.PostsValidator;
 import com.google.demoinstagram.repository.PostsRepository;
-import com.google.demoinstagram.service.LikePostsService;
 import com.google.demoinstagram.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.List;
 public class PostsServiceImpl implements PostsService {
 
     private final PostsRepository postsRepository;
-    private final LikePostsService likePostsService;
     private PostsValidator postsValidator;
 
     @Autowired
@@ -44,7 +42,18 @@ public class PostsServiceImpl implements PostsService {
         existPosts.setDescription(posts.getDescription());
         existPosts.setUsersId(posts.getUsersId());
         existPosts.setTitle(posts.getTitle());
+        existPosts.setCountLike(posts.getCountLike());
 
+        postsRepository.save(existPosts);
+        return existPosts;
+    }
+
+    @Transactional
+    @Override
+    public Posts updateCountLike(Posts posts, Long id) {
+        Posts existPosts = postsRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Posts", "id", id));
+        existPosts.setCountLike(posts.getCountLike());
         postsRepository.save(existPosts);
         return existPosts;
     }
