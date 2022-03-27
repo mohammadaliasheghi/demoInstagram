@@ -70,4 +70,16 @@ public class PostsRestController {
         postsService.deleteAllPostsByHashTag(hashTag);
         return new ResponseEntity<>("Posts Deleted Successfully!", HttpStatus.OK);
     }
+
+    // http://localhost:8085/demoInstagram/api/posts/get-post-by-max-like
+    @GetMapping(value = "/get-post-by-max-like")
+    public ResponseEntity<Posts> getPostByMaxLike() {
+        return new ResponseEntity<>(postsService.getPostByMaxLike(), HttpStatus.OK);
+    }
+
+    // http://localhost:8085/demoInstagram/api/posts/order-by-count-like-desc
+    @GetMapping(value = "/order-by-count-like-desc")
+    public List<Posts> orderByCountLikeDesc() {
+        return postsService.orderByCountLikeDesc();
+    }
 }

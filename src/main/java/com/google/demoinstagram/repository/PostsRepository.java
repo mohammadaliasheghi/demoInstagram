@@ -16,4 +16,8 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 
     @Query("select p from Posts p join p.hashTags h where upper(h.text) = upper(:hashTagText)")
     List<Posts> getAllPostsByHashTag(@Param("hashTagText") String hashTagText);
+
+    Posts findFirstByOrderByCountLikeDesc();
+
+    List<Posts> getAllByOrderByCountLikeDesc();
 }

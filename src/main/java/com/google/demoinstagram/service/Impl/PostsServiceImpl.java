@@ -97,4 +97,14 @@ public class PostsServiceImpl implements PostsService {
         List<Posts> posts = postsRepository.getAllPostsByHashTag(hashTag);
         postsRepository.deleteAll(posts);
     }
+
+    @Override
+    public Posts getPostByMaxLike() {
+        return postsRepository.findFirstByOrderByCountLikeDesc();
+    }
+
+    @Override
+    public List<Posts> orderByCountLikeDesc() {
+        return postsRepository.getAllByOrderByCountLikeDesc();
+    }
 }
