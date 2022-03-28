@@ -74,4 +74,10 @@ public class Users {
 
     @OneToMany(mappedBy = "following", cascade = CascadeType.ALL)
     private List<FollowUsers> followings;
+
+    @OneToMany(mappedBy = "sendUser", cascade = CascadeType.ALL)
+    private List<PrivateMessage> sendUsers;
+
+    @OneToMany(mappedBy = "receiveUser", cascade = CascadeType.ALL)
+    private List<PrivateMessage> receiveUser;
 }
