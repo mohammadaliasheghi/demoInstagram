@@ -50,12 +50,11 @@ public class PostsServiceImpl implements PostsService {
 
     @Transactional
     @Override
-    public Posts updateCountLike(Posts posts, Long id) {
+    public void updateCountLike(Posts posts, Long id) {
         Posts existPosts = postsRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Posts", "id", id));
         existPosts.setCountLike(posts.getCountLike());
         postsRepository.save(existPosts);
-        return existPosts;
     }
 
     @Override

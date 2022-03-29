@@ -14,7 +14,7 @@ public interface PostsService {
     Posts update(Posts posts, Long id) throws Exception;
 
     @Transactional
-    Posts updateCountLike(Posts posts, Long id);
+    void updateCountLike(Posts posts, Long id);
 
     List<Posts> listInfo();
 
