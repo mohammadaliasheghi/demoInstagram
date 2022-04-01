@@ -49,4 +49,14 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
                 new ResourceNotFoundException("Users", "id", id));
         privateMessageRepository.deleteById(id);
     }
+
+    @Override
+    public List<String> getAllMessageBySendUserIdAndReceiveUserId(PrivateMessage privateMessage) {
+        if (privateMessage != null && privateMessage.getSendUser() != null && privateMessage.getReceiveUser() != null) {
+            if (privateMessageRepository.existsPrivateMessageBySendUser_IdAndReceiveUser_Id(privateMessage.getSendUser().getId(), privateMessage.getReceiveUser().getId())) {
+                return privateMessageRepository.getAllMessageBySendUser_IdAndReceiveUser_Id(privateMessage.getSendUser().getId(), privateMessage.getReceiveUser().getId());
+            }
+        }
+        return null;
+    }
 }

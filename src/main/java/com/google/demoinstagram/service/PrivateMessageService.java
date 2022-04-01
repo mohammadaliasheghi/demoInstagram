@@ -18,4 +18,6 @@ public interface PrivateMessageService {
     List<PrivateMessage> listInfo();
 
     void delete(Long id);
+
+    List<String> getAllMessageBySendUserIdAndReceiveUserId(PrivateMessage privateMessage);
 }

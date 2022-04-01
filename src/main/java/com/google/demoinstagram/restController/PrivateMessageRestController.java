@@ -51,4 +51,10 @@ public class PrivateMessageRestController {
     public ResponseEntity<PrivateMessage> get(@PathVariable("id") Long id) {
         return new ResponseEntity<>(privateMessageService.get(id), HttpStatus.OK);
     }
+
+    // http://localhost:8085/demoInstagram/api/message/get-all-text
+    @PostMapping(value = {"/get-all-text"})
+    public ResponseEntity<List<String>> getAllMessageBySendUserIdAndReceiveUserId(@RequestBody PrivateMessage privateMessage) {
+        return new ResponseEntity<>(privateMessageService.getAllMessageBySendUserIdAndReceiveUserId(privateMessage), HttpStatus.OK);
+    }
 }
