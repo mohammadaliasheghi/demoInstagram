@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.demoinstagram.entity.Users;
 import com.google.demoinstagram.restController.UsersRestController;
-import com.google.demoinstagram.service.UsersService;
 import org.json.JSONException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +28,6 @@ class DemoInstagramApplicationTests {
 
     @Autowired
     private TestRestTemplate restTemplate;
-
-    @Autowired
-    private UsersService usersService;
 
     @Autowired
     private UsersRestController usersRestController;
