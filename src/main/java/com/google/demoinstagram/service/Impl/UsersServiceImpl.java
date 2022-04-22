@@ -73,4 +73,9 @@ public class UsersServiceImpl implements UsersService {
     public Optional<Users> findByUsername(String name) {
         return usersRepository.findByUsername(name);
     }
+
+    @Override
+    public Boolean existUsersById(long id) {
+        return usersRepository.existsById(id);
+    }
 }
