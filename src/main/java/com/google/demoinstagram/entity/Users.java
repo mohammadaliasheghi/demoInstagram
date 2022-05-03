@@ -3,12 +3,15 @@ package com.google.demoinstagram.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -43,14 +46,14 @@ public class Users {
     @Column(name = "COVER")
     private String cover;
 
-    //for test application
-//    @Column(name = "CREATE_DATE", updatable = false)
-//    @CreationTimestamp
-//    private Date createDate;
-//
-//    @Column(name = "UPDATE_DATE")
-//    @UpdateTimestamp
-//    private Date updateDate;
+    //TODO for test application Must Be Comment Date
+    @Column(name = "CREATE_DATE", updatable = false)
+    @CreationTimestamp
+    private Date createDate;
+
+    @Column(name = "UPDATE_DATE")
+    @UpdateTimestamp
+    private Date updateDate;
 
     @OneToMany(mappedBy = "usersId", cascade = CascadeType.ALL)
     private List<Posts> posts;
