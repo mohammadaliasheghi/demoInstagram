@@ -28,7 +28,7 @@ public class SavedPostsRestController {
 
     // http://localhost:8085/demoInstagram/api/saved-post/count-all
     @GetMapping(value = {"/count-all"})
-    public Long countAllLikeByPostsId() {
+    public Long countAllSavedPosts() {
         return savedPostsService.countAllSavedPosts();
     }
 

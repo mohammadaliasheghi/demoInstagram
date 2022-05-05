@@ -60,7 +60,7 @@ public class HashTagRestController {
 
     // http://localhost:8085/demoInstagram/api/hash-tag/delete-by-text/sport
     @DeleteMapping("/delete-by-text/{hashTag}")
-    public ResponseEntity<String> deleteHashTagByText(@PathVariable("hashTag") String hashTag) {
+    public ResponseEntity<String> deleteHashTagByText(@PathVariable("hashTag") String hashTag) throws Exception {
         hashTagService.deleteHashTagByText(hashTag);
         return new ResponseEntity<>("HashTag Deleted Successfully!", HttpStatus.OK);
     }

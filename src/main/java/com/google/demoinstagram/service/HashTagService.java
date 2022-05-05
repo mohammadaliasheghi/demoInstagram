@@ -21,5 +21,5 @@ public interface HashTagService {
 
     HashTag getHashTagByText(String hashTag);
 
-    void deleteHashTagByText(String hashTagText);
+    void deleteHashTagByText(String hashTagText) throws Exception;
 }

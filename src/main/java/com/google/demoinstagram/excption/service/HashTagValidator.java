@@ -24,4 +24,9 @@ public class HashTagValidator {
         if (hashTagRepository.existsHashTagByText(hashTag.getText()))
             throw new Exception("HashTagIsDuplicated");
     }
+
+    public void validateDeleteHashTagByText(String hashTagText) throws Exception {
+        if (hashTagText == null || hashTagText.length() == 0)
+            throw new Exception("HashTagTextIsEmpty");
+    }
 }

@@ -28,13 +28,13 @@ public class LikeCommentsRestController {
 
     // http://localhost:8085/demoInstagram/api/like-comments/count-all-like/1
     @GetMapping(value = {"/count-all-like/{postsCommentsId}"})
-    public Long countAllLikeByPostsId(@PathVariable("postsCommentsId") Long postsCommentsId) throws Exception {
-        return likeCommentsService.countAllLikeCommentsByPostsCommentsId(postsCommentsId);
+    public Long countAllLikeByPostCommentId(@PathVariable("postsCommentsId") Long postCommentId) throws Exception {
+        return likeCommentsService.countAllLikeCommentsByPostsCommentsId(postCommentId);
     }
 
     // http://localhost:8085/demoInstagram/api/like-comments/get-all-username-liked-comment/1
     @GetMapping(value = {"/get-all-username-liked-comment/{postsCommentsId}"})
-    public List<String> getAllUsernameLikedCommentsByPostsCommentsId(@PathVariable("postsCommentsId") Long postsCommentsId) throws Exception {
-        return likeCommentsService.getAllUsernameLikedCommentsByPostCommentId(postsCommentsId);
+    public List<String> getAllUsernameLikedCommentsByPostCommentId(@PathVariable("postsCommentsId") Long PostCommentId) throws Exception {
+        return likeCommentsService.getAllUsernameLikedCommentsByPostCommentId(PostCommentId);
     }
 }

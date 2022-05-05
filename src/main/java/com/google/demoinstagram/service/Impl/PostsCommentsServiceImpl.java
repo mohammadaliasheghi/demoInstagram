@@ -28,9 +28,9 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
         PostsComments existPostsComments = postsCommentsRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("PostsComments", "id", id));
 
-        existPostsComments.setText(existPostsComments.getText());
-        existPostsComments.setUsersId(existPostsComments.getUsersId());
-        existPostsComments.setPostsId(existPostsComments.getPostsId());
+        existPostsComments.setText(postsComments.getText());
+        existPostsComments.setUsersId(postsComments.getUsersId());
+        existPostsComments.setPostsId(postsComments.getPostsId());
 
         postsCommentsRepository.save(existPostsComments);
         return existPostsComments;

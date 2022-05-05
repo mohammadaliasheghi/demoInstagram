@@ -24,6 +24,6 @@ public class HashTag {
     @Column(name = "TEXT", nullable = false)
     private String text;
 
-    @ManyToMany(mappedBy = "hashTags", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "hashTags")
     private List<Posts> posts;
 }

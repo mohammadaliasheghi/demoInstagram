@@ -66,8 +66,11 @@ public class HashTagServiceImpl implements HashTagService {
     }
 
     @Override
-    public void deleteHashTagByText(String hashTagText) {
+    public void deleteHashTagByText(String hashTagText) throws Exception {
+        hashTagValidator.validateDeleteHashTagByText(hashTagText);
         HashTag hashTag = hashTagRepository.getHashTagByText(hashTagText);
-        hashTagRepository.deleteById(hashTag.getId());
+        if (hashTag != null)
+            hashTagRepository.deleteById(hashTag.getId());
+        else throw new Exception("TextInvalid");
     }
 }
