@@ -57,6 +57,15 @@ public class PostsServiceImpl implements PostsService {
         postsRepository.save(existPosts);
     }
 
+    @Transactional
+    @Override
+    public void updateCountComment(Posts posts, Long id) {
+        Posts existPosts = postsRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Posts", "id", id));
+        existPosts.setCountComment(posts.getCountComment());
+        postsRepository.save(existPosts);
+    }
+
     @Override
     public List<Posts> listInfo() {
         return postsRepository.findAll();

@@ -36,6 +36,10 @@ public class Posts {
     @Column(name = "COUNT_LIKE")
     private Long countLike = 0L;
 
+    @NotNull
+    @Column(name = "COUNT_COMMENT")
+    private Long countComment = 0L;
+
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
     private Date createDate;

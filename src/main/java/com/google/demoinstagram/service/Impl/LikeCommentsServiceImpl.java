@@ -1,9 +1,11 @@
 package com.google.demoinstagram.service.Impl;
 
 import com.google.demoinstagram.entity.LikeComments;
+import com.google.demoinstagram.entity.PostsComments;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.repository.LikeCommentsRepository;
 import com.google.demoinstagram.service.LikeCommentsService;
+import com.google.demoinstagram.service.PostsCommentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import java.util.List;
 public class LikeCommentsServiceImpl implements LikeCommentsService {
 
     private final LikeCommentsRepository likeCommentsRepository;
+    private final PostsCommentsService postsCommentsService;
 
     @Transactional
     @Override
@@ -25,11 +28,20 @@ public class LikeCommentsServiceImpl implements LikeCommentsService {
                     likeComments.getUsersId().getId(), likeComments.getPostsId().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
                 this.delete(newLikePosts.getId());
+                PostsComments postsComments = postsCommentsService.get(likeComments.getPostsCommentsId().getId());
+                Long countLikeComment = postsComments.getCountLikeComment() - 1;
+                postsComments.setCountLikeComment(countLikeComment);
+                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsCommentsId().getId());
             }
         } else {
-            if (likeComments.getLiked().equals(true))
-                return likeCommentsRepository.save(likeComments);
-            else
+            if (likeComments.getLiked().equals(true)) {
+                LikeComments saveLikeComment = likeCommentsRepository.save(likeComments);
+                PostsComments postsComments = postsCommentsService.get(likeComments.getPostsCommentsId().getId());
+                Long countLikeComment = postsComments.getCountLikeComment() + 1;
+                postsComments.setCountLikeComment(countLikeComment);
+                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsCommentsId().getId());
+                return saveLikeComment;
+            } else
                 return null;
         }
 

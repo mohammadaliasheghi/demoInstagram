@@ -29,6 +29,10 @@ public class PostsComments {
     private String text;
 
     @NotNull
+    @Column(name = "COUNT_LIKE_COMMENT")
+    private Long countLikeComment = 0L;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
     private Users usersId;

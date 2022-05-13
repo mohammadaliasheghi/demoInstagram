@@ -16,6 +16,8 @@ public interface PostsService {
     @Transactional
     void updateCountLike(Posts posts, Long id);
 
+    void updateCountComment(Posts posts, Long id);
+
     List<Posts> listInfo();
 
     void delete(Long id);
