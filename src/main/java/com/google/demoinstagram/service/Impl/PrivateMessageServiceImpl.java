@@ -18,13 +18,13 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
     @Transactional
     @Override
-    public PrivateMessage add(PrivateMessage privateMessage) {
+    public PrivateMessage addMessage(PrivateMessage privateMessage) {
         return privateMessageRepository.save(privateMessage);
     }
 
     @Transactional
     @Override
-    public PrivateMessage update(PrivateMessage privateMessage, Long id) {
+    public PrivateMessage updateMessage(PrivateMessage privateMessage, Long id) {
         PrivateMessage existingPrivateMessage = privateMessageRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("PrivateMessage", "id", id));
         existingPrivateMessage.setText(privateMessage.getText());
@@ -33,18 +33,18 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
     }
 
     @Override
-    public PrivateMessage get(Long id) {
+    public PrivateMessage getMessage(Long id) {
         return privateMessageRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("PrivateMessage", "id", id));
     }
 
     @Override
-    public List<PrivateMessage> listInfo() {
+    public List<PrivateMessage> messageListInfo() {
         return privateMessageRepository.findAll();
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteMessage(Long id) {
         privateMessageRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Users", "id", id));
         privateMessageRepository.deleteById(id);

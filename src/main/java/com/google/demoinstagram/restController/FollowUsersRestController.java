@@ -23,19 +23,19 @@ public class FollowUsersRestController {
     // http://localhost:8085/demoInstagram/api/follow-users/create
     @PostMapping(value = "/create")
     public ResponseEntity<FollowUsers> create(@RequestBody FollowUsers followUsers) throws Exception {
-        return new ResponseEntity<>(followUsersService.create(followUsers), HttpStatus.CREATED);
+        return new ResponseEntity<>(followUsersService.addFollowerOrFollowing(followUsers), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/follow-users/
     @GetMapping(value = {"/", ""})
     public List<FollowUsers> listInfo() {
-        return followUsersService.listInfo();
+        return followUsersService.FollowListInfo();
     }
 
     // http://localhost:8085/demoInstagram/api/follow-users/get/1
     @GetMapping("/get/{id}")
     public ResponseEntity<FollowUsers> get(@PathVariable("id") long id) {
-        return new ResponseEntity<>(followUsersService.get(id), HttpStatus.OK);
+        return new ResponseEntity<>(followUsersService.getFollowById(id), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/follow-users/count-all-following/1

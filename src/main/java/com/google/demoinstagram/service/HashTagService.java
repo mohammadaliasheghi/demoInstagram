@@ -8,18 +8,7 @@ import java.util.List;
 public interface HashTagService {
 
     @Transactional
-    HashTag add(HashTag hashTag) throws Exception;
+    void createHashTagList(List<HashTag> hashTags) throws Exception;
 
-    List<HashTag> listInfo();
-
-    HashTag get(Long id);
-
-    @Transactional
-    HashTag update(HashTag hashTag, Long id) throws Exception;
-
-    void delete(Long id);
-
-    HashTag getHashTagByText(String hashTag);
-
-    void deleteHashTagByText(String hashTagText) throws Exception;
+    List<HashTag> hashTagListInfo();
 }

@@ -21,7 +21,4 @@ public interface UsersService {
     void deleteUser(long id);
 
     Optional<Users> findByUsername(String name);
-
-    //TestClass
-    Boolean existUsersById(long id);
 }

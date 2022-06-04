@@ -7,7 +7,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +23,6 @@ public class HashTag {
     @Column(name = "TEXT", nullable = false)
     private String text;
 
-    @ManyToMany(mappedBy = "hashTags")
-    private List<Posts> posts;
+    @ManyToOne
+    private Posts posts;
 }

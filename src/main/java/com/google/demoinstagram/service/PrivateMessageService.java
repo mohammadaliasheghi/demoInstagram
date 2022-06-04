@@ -8,16 +8,16 @@ import java.util.List;
 public interface PrivateMessageService {
 
     @Transactional
-    PrivateMessage add(PrivateMessage privateMessage);
+    PrivateMessage addMessage(PrivateMessage privateMessage);
 
     @Transactional
-    PrivateMessage update(PrivateMessage privateMessage, Long id);
+    PrivateMessage updateMessage(PrivateMessage privateMessage, Long id);
 
-    PrivateMessage get(Long id);
+    PrivateMessage getMessage(Long id);
 
-    List<PrivateMessage> listInfo();
+    List<PrivateMessage> messageListInfo();
 
-    void delete(Long id);
+    void deleteMessage(Long id);
 
     List<String> getAllMessageBySendUserIdAndReceiveUserId(PrivateMessage privateMessage);
 }

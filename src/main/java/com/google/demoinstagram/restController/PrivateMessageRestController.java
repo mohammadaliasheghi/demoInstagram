@@ -23,33 +23,33 @@ public class PrivateMessageRestController {
     // http://localhost:8085/demoInstagram/api/message/add
     @PostMapping(value = "/add")
     public ResponseEntity<PrivateMessage> add(@RequestBody PrivateMessage privateMessage) {
-        return new ResponseEntity<>(privateMessageService.add(privateMessage), HttpStatus.CREATED);
+        return new ResponseEntity<>(privateMessageService.addMessage(privateMessage), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/message/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<PrivateMessage> update(@PathVariable("id") Long id
             , @RequestBody PrivateMessage privateMessage) {
-        return new ResponseEntity<>(privateMessageService.update(privateMessage, id), HttpStatus.OK);
+        return new ResponseEntity<>(privateMessageService.updateMessage(privateMessage, id), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/message
     @GetMapping(value = {"", "/"})
     public List<PrivateMessage> listInfo() {
-        return privateMessageService.listInfo();
+        return privateMessageService.messageListInfo();
     }
 
     // http://localhost:8085/demoInstagram/api/message/delete/1
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        privateMessageService.delete(id);
+        privateMessageService.deleteMessage(id);
         return new ResponseEntity<>("Message Deleted Successfully!", HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/message/get/1
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<PrivateMessage> get(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(privateMessageService.get(id), HttpStatus.OK);
+        return new ResponseEntity<>(privateMessageService.getMessage(id), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/message/get-all-text

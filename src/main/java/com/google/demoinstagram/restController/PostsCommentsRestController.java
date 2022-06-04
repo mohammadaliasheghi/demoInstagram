@@ -23,26 +23,26 @@ public class PostsCommentsRestController {
     // http://localhost:8085/demoInstagram/api/posts-comments/add
     @PostMapping(value = "/add")
     public ResponseEntity<PostsComments> save(@RequestBody PostsComments postsComments) {
-        return new ResponseEntity<>(postsCommentsService.add(postsComments), HttpStatus.CREATED);
+        return new ResponseEntity<>(postsCommentsService.addComment(postsComments), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/posts-comments/
     @GetMapping(value = {"/", ""})
     public List<PostsComments> listInfo() {
-        return postsCommentsService.list();
+        return postsCommentsService.commentListInfo();
     }
 
     // http://localhost:8085/demoInstagram/api/posts-comments/get/1
     @GetMapping("/get/{id}")
     public ResponseEntity<PostsComments> get(@PathVariable("id") long userId) {
-        return new ResponseEntity<>(postsCommentsService.get(userId), HttpStatus.OK);
+        return new ResponseEntity<>(postsCommentsService.getComment(userId), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/posts-comments/update/1
     @PutMapping("/update/{id}")
     public ResponseEntity<PostsComments> update(@PathVariable("id") long id
             , @RequestBody PostsComments postsComments) {
-        return new ResponseEntity<>(postsCommentsService.update(postsComments, id), HttpStatus.OK);
+        return new ResponseEntity<>(postsCommentsService.updateComment(postsComments, id), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/posts-comments/delete/1
@@ -50,7 +50,7 @@ public class PostsCommentsRestController {
     public ResponseEntity<String> delete(@PathVariable("id") long id) {
 
         // delete user from DB
-        postsCommentsService.delete(id);
+        postsCommentsService.deleteComment(id);
 
         return new ResponseEntity<>("Comment Deleted Successfully!", HttpStatus.OK);
     }

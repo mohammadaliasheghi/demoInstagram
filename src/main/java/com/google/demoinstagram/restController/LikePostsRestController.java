@@ -23,7 +23,7 @@ public class LikePostsRestController {
     // http://localhost:8085/demoInstagram/api/like-post/create
     @PostMapping(value = "/create")
     public ResponseEntity<LikePosts> create(@RequestBody LikePosts likePosts) throws Exception {
-        return new ResponseEntity<>(likePostsService.create(likePosts), HttpStatus.CREATED);
+        return new ResponseEntity<>(likePostsService.createLikePost(likePosts), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/like-post/1

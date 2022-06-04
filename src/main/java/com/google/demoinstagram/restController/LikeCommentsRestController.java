@@ -23,7 +23,7 @@ public class LikeCommentsRestController {
     // http://localhost:8085/demoInstagram/api/like-comments/create
     @PostMapping(value = "/create")
     public ResponseEntity<LikeComments> create(@RequestBody LikeComments likeComments) {
-        return new ResponseEntity<>(likeCommentsService.create(likeComments), HttpStatus.CREATED);
+        return new ResponseEntity<>(likeCommentsService.createLikeComment(likeComments), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/like-comments/count-all-like/1

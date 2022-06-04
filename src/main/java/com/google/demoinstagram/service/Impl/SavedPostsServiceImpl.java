@@ -18,11 +18,11 @@ public class SavedPostsServiceImpl implements SavedPostsService {
 
     @Transactional
     @Override
-    public SavedPosts create(SavedPosts savedPosts) {
+    public SavedPosts addSavedPost(SavedPosts savedPosts) {
         if (savedPostsRepository.existsSavedPostsByUsersId_IdAndPostsId_Id(savedPosts.getUsersId().getId(), savedPosts.getPostsId().getId())) {
             SavedPosts newSavedPosts = savedPostsRepository.getSavedPostsByUsersId_IdAndPostsId_Id(savedPosts.getUsersId().getId(), savedPosts.getPostsId().getId());
             if (newSavedPosts != null && newSavedPosts.getId() != null) {
-                this.delete(newSavedPosts.getId());
+                this.deleteSavedPost(newSavedPosts.getId());
             }
         } else {
             if (savedPosts.getSaved().equals(true))
@@ -35,7 +35,7 @@ public class SavedPostsServiceImpl implements SavedPostsService {
     }
 
     @Override
-    public void delete(long id) {
+    public void deleteSavedPost(long id) {
         savedPostsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("SavedPosts", "Id", id));
         savedPostsRepository.deleteById(id);
@@ -47,13 +47,13 @@ public class SavedPostsServiceImpl implements SavedPostsService {
     }
 
     @Override
-    public SavedPosts get(Long id) {
+    public SavedPosts getSavedPost(Long id) {
         return savedPostsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("SavedPosts", "id", id));
     }
 
     @Override
-    public List<SavedPosts> listInfo() {
+    public List<SavedPosts> savedPostListInfo() {
         return savedPostsRepository.findAll();
     }
 

@@ -8,21 +8,18 @@ import java.util.List;
 public interface PostsService {
 
     @Transactional
-    Posts create(Posts posts) throws Exception;
-
-    @Transactional
-    Posts update(Posts posts, Long id) throws Exception;
+    Posts createPost(Posts posts) throws Exception;
 
     @Transactional
     void updateCountLike(Posts posts, Long id);
 
     void updateCountComment(Posts posts, Long id);
 
-    List<Posts> listInfo();
+    List<Posts> postListInfo();
 
-    void delete(Long id);
+    void deletePost(Long id);
 
-    Posts get(Long id);
+    Posts getPost(Long id);
 
     List<Posts> getAllFollowingPostsByUserId(Long userId) throws Exception;
 

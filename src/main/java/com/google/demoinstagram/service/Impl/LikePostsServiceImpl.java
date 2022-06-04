@@ -19,11 +19,11 @@ public class LikePostsServiceImpl implements LikePostsService {
     private final PostsService postsService;
 
     @Override
-    public LikePosts create(LikePosts likePosts) throws Exception {
+    public LikePosts createLikePost(LikePosts likePosts) {
         if (likePostsRepository.existsLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId())) {
             LikePosts newLikePosts = likePostsRepository.getLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
-                Posts posts = postsService.get(likePosts.getPostsId().getId());
+                Posts posts = postsService.getPost(likePosts.getPostsId().getId());
                 Long countLikePosts = posts.getCountLike() - 1;
                 posts.setCountLike(countLikePosts);
                 postsService.updateCountLike(posts, likePosts.getPostsId().getId());
@@ -31,7 +31,7 @@ public class LikePostsServiceImpl implements LikePostsService {
             }
         } else {
             if (likePosts.getLiked().equals(true)) {
-                Posts posts = postsService.get(likePosts.getPostsId().getId());
+                Posts posts = postsService.getPost(likePosts.getPostsId().getId());
                 Long countLikePosts = posts.getCountLike() + 1;
                 posts.setCountLike(countLikePosts);
                 postsService.updateCountLike(posts, likePosts.getPostsId().getId());

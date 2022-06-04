@@ -53,8 +53,7 @@ public class Posts {
     @JoinColumn(name = "USERS_ID")
     private Users usersId;
 
-    @ManyToMany
-    @JoinTable(name = "POSTS_TAGS")
+    @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL)
     private List<HashTag> hashTags;
 
     @OneToMany(mappedBy = "postsId", cascade = CascadeType.ALL)

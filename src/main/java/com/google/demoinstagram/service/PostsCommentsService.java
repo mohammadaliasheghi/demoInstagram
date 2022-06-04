@@ -8,16 +8,16 @@ import java.util.List;
 public interface PostsCommentsService {
 
     @Transactional
-    PostsComments add(PostsComments postsComments);
+    PostsComments addComment(PostsComments postsComments);
 
     @Transactional
-    PostsComments update(PostsComments postsComments, Long id);
+    PostsComments updateComment(PostsComments postsComments, Long id);
 
-    void delete(Long id);
+    void deleteComment(Long id);
 
-    PostsComments get(Long id);
+    PostsComments getComment(Long id);
 
-    List<PostsComments> list();
+    List<PostsComments> commentListInfo();
 
     List<PostsComments> listInfoCommentPostByPostsId(Long postId) throws Exception;
 

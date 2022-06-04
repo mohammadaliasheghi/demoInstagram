@@ -23,7 +23,7 @@ public class SavedPostsRestController {
     // http://localhost:8085/demoInstagram/api/saved-post/create
     @PostMapping(value = "/create")
     public ResponseEntity<SavedPosts> create(@RequestBody SavedPosts savedPosts) {
-        return new ResponseEntity<>(savedPostsService.create(savedPosts), HttpStatus.CREATED);
+        return new ResponseEntity<>(savedPostsService.addSavedPost(savedPosts), HttpStatus.CREATED);
     }
 
     // http://localhost:8085/demoInstagram/api/saved-post/count-all
@@ -35,13 +35,13 @@ public class SavedPostsRestController {
     // http://localhost:8085/demoInstagram/api/saved-post/get/1
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<SavedPosts> get(@PathVariable("id") long id) {
-        return new ResponseEntity<>(savedPostsService.get(id), HttpStatus.OK);
+        return new ResponseEntity<>(savedPostsService.getSavedPost(id), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/saved-post
     @GetMapping(value = {"", "/"})
     public List<SavedPosts> listInfo() {
-        return savedPostsService.listInfo();
+        return savedPostsService.savedPostListInfo();
     }
 
     // http://localhost:8085/demoInstagram/api/saved-post/count-saved-by-users-id/1

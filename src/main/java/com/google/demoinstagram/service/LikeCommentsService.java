@@ -8,7 +8,7 @@ import java.util.List;
 public interface LikeCommentsService {
 
     @Transactional
-    LikeComments create(LikeComments likeComments);
+    LikeComments createLikeComment(LikeComments likeComments);
 
     void delete(long id);
 

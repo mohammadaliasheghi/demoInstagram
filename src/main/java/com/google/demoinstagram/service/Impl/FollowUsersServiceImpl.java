@@ -16,13 +16,13 @@ public class FollowUsersServiceImpl implements FollowUsersService {
     private final FollowUsersRepository followUsersRepository;
 
     @Override
-    public FollowUsers create(FollowUsers followUsers) throws Exception {
+    public FollowUsers addFollowerOrFollowing(FollowUsers followUsers) throws Exception {
         if (followUsers.getFollower().getId().compareTo(followUsers.getFollowing().getId()) == 0)
             throw new Exception("CannotBeFollowYourSelf");
         if (followUsersRepository.existsFollowUsersByFollower_IdAndFollowing_Id(followUsers.getFollower().getId(), followUsers.getFollowing().getId())) {
             FollowUsers newFollowUsers = followUsersRepository.getFollowUsersByFollower_IdAndFollowing_Id(followUsers.getFollower().getId(), followUsers.getFollowing().getId());
             if (newFollowUsers != null && newFollowUsers.getId() != null)
-                this.delete(newFollowUsers.getId());
+                this.deleteFollowById(newFollowUsers.getId());
         } else
             return followUsersRepository.save(followUsers);
 
@@ -30,18 +30,18 @@ public class FollowUsersServiceImpl implements FollowUsersService {
     }
 
     @Override
-    public List<FollowUsers> listInfo() {
+    public List<FollowUsers> FollowListInfo() {
         return followUsersRepository.findAll();
     }
 
     @Override
-    public FollowUsers get(long id) {
+    public FollowUsers getFollowById(long id) {
         return followUsersRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("FollowUsers", "id", id));
     }
 
     @Override
-    public void delete(long id) {
+    public void deleteFollowById(long id) {
         followUsersRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("LikePosts", "Id", id));
         followUsersRepository.deleteById(id);

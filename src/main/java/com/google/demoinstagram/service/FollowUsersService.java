@@ -8,13 +8,13 @@ import java.util.List;
 public interface FollowUsersService {
 
     @Transactional
-    FollowUsers create(FollowUsers followUsers) throws Exception;
+    FollowUsers addFollowerOrFollowing(FollowUsers followUsers) throws Exception;
 
-    List<FollowUsers> listInfo();
+    List<FollowUsers> FollowListInfo();
 
-    FollowUsers get(long id);
+    FollowUsers getFollowById(long id);
 
-    void delete(long id);
+    void deleteFollowById(long id);
 
     Long countAllFollowingByUserId(Long userId) throws Exception;
 

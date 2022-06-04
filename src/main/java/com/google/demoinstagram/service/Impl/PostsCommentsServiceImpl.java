@@ -21,8 +21,8 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
 
     @Transactional
     @Override
-    public PostsComments add(PostsComments postsComments) {
-        Posts posts = postsService.get(postsComments.getPostsId().getId());
+    public PostsComments addComment(PostsComments postsComments) {
+        Posts posts = postsService.getPost(postsComments.getPostsId().getId());
         Long countComment = posts.getCountComment() + 1;
         posts.setCountComment(countComment);
         postsService.updateCountComment(posts, postsComments.getPostsId().getId());
@@ -31,7 +31,7 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
 
     @Transactional
     @Override
-    public PostsComments update(PostsComments postsComments, Long id) {
+    public PostsComments updateComment(PostsComments postsComments, Long id) {
         PostsComments existPostsComments = postsCommentsRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("PostsComments", "id", id));
 
@@ -53,24 +53,24 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteComment(Long id) {
         PostsComments postsComments = postsCommentsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("postsComments", "id", id));
         postsCommentsRepository.deleteById(id);
-        Posts posts = postsService.get(postsComments.getPostsId().getId());
+        Posts posts = postsService.getPost(postsComments.getPostsId().getId());
         Long countComment = posts.getCountComment() - 1;
         posts.setCountComment(countComment);
         postsService.updateCountComment(posts, postsComments.getPostsId().getId());
     }
 
     @Override
-    public PostsComments get(Long id) {
+    public PostsComments getComment(Long id) {
         return postsCommentsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("postsComments", "id", id));
     }
 
     @Override
-    public List<PostsComments> list() {
+    public List<PostsComments> commentListInfo() {
         return postsCommentsRepository.findAll();
     }
 

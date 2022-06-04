@@ -8,15 +8,15 @@ import java.util.List;
 public interface SavedPostsService {
 
     @Transactional
-    SavedPosts create(SavedPosts savedPosts);
+    SavedPosts addSavedPost(SavedPosts savedPosts);
 
-    void delete(long id);
+    void deleteSavedPost(long id);
 
     Long countAllSavedPosts();
 
-    SavedPosts get(Long id);
+    SavedPosts getSavedPost(Long id);
 
-    List<SavedPosts> listInfo();
+    List<SavedPosts> savedPostListInfo();
 
     Long countSavedPostByUsersId(Long usersId);
 
