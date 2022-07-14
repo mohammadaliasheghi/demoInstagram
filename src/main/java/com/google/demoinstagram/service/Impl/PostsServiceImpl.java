@@ -2,8 +2,12 @@ package com.google.demoinstagram.service.Impl;
 
 import com.google.demoinstagram.entity.HashTag;
 import com.google.demoinstagram.entity.Posts;
+import com.google.demoinstagram.entity.SavedPosts;
+import com.google.demoinstagram.entity.Users;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.repository.PostsRepository;
+import com.google.demoinstagram.repository.SavedPostsRepository;
+import com.google.demoinstagram.repository.UsersRepository;
 import com.google.demoinstagram.service.HashTagService;
 import com.google.demoinstagram.service.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +23,8 @@ import java.util.List;
 public class PostsServiceImpl implements PostsService {
 
     private final PostsRepository postsRepository;
+    private final UsersRepository usersRepository;
+    private final SavedPostsRepository savedPostsRepository;
     private HashTagService hashTagService;
 
     @Autowired
@@ -119,5 +125,22 @@ public class PostsServiceImpl implements PostsService {
     @Override
     public List<Posts> orderByCountLikeDesc() {
         return postsRepository.getAllByOrderByCountLikeDesc();
+    }
+
+    @Override
+    public void savedPost(Long postId, Boolean saved) {
+        Posts posts = this.getPost(postId);
+        Users users = usersRepository.getById(posts.getUsersId().getId());
+        if (saved.equals(true)) {
+            SavedPosts savedPosts = new SavedPosts();
+            savedPosts.setPostsId(posts);
+            savedPosts.setUsersId(users);
+            savedPosts.setSaved(true);
+            savedPostsRepository.save(savedPosts);
+        } else {
+            SavedPosts savedPosts = savedPostsRepository.getSavedPostsByUsersId_IdAndPostsId_Id(postId, users.getId());
+            if (savedPosts.getSaved())
+                savedPostsRepository.deleteById(savedPosts.getId());
+        }
     }
 }

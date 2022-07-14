@@ -40,6 +40,10 @@ public class Posts {
     @Column(name = "COUNT_COMMENT")
     private Long countComment = 0L;
 
+    @NotNull
+    @Column(name = "IS_SAVED_POST")
+    private Boolean isSavedPost = false;
+
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp
     private Date createDate;

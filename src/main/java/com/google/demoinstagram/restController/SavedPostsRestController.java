@@ -20,12 +20,6 @@ public class SavedPostsRestController {
         this.savedPostsService = savedPostsService;
     }
 
-    // http://localhost:8085/demoInstagram/api/saved-post/create
-    @PostMapping(value = "/create")
-    public ResponseEntity<SavedPosts> create(@RequestBody SavedPosts savedPosts) {
-        return new ResponseEntity<>(savedPostsService.addSavedPost(savedPosts), HttpStatus.CREATED);
-    }
-
     // http://localhost:8085/demoInstagram/api/saved-post/count-all
     @GetMapping(value = {"/count-all"})
     public Long countAllSavedPosts() {

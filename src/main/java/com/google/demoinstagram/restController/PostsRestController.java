@@ -75,4 +75,11 @@ public class PostsRestController {
     public List<Posts> orderByCountLikeDesc() {
         return postsService.orderByCountLikeDesc();
     }
+
+    // http://localhost:8085/demoInstagram/api/posts/saved
+    @DeleteMapping(value = "/saved-post")
+    public ResponseEntity<String> savedPost(@RequestBody Long id, Boolean saved) {
+        postsService.savedPost(id, saved);
+        return new ResponseEntity<>("SAVED!", HttpStatus.OK);
+    }
 }

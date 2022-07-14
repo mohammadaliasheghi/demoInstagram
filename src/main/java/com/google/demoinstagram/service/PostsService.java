@@ -30,4 +30,6 @@ public interface PostsService {
     Posts getPostByMaxLike();
 
     List<Posts> orderByCountLikeDesc();
+
+    void savedPost(Long postId, Boolean saved);
 }
