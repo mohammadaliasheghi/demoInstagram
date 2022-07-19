@@ -1,36 +1,33 @@
 package com.google.demoinstagram.excption.service;
 
 import com.google.demoinstagram.entity.Users;
+import com.google.demoinstagram.model.UsersModel;
 import com.google.demoinstagram.repository.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class UsersValidator {
 
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
-    @Autowired
-    public void setUsersRepository(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+    public void validate(UsersModel usersModel) throws Exception {
 
-    public void validate(Users users) throws Exception {
-
-        if (users != null) {
-            checkPhoneNumberAndUsersDuplicateAndPassword(users);
+        if (usersModel != null) {
+            checkPhoneNumberAndUsersDuplicateAndPassword(usersModel);
         }
     }
 
-    public void checkPhoneNumberAndUsersDuplicateAndPassword(Users users) throws Exception {
-        if (users.getNumber().length() != 11)
+    public void checkPhoneNumberAndUsersDuplicateAndPassword(UsersModel usersModel) throws Exception {
+        if (usersModel.getNumber().length() != 11)
             throw new Exception("phoneNumberLengthInCorrect");
-        Optional<Users> usersList = usersRepository.findByUsername(users.getUsername());
+        Optional<Users> usersList = usersRepository.findByUsername(usersModel.getUsername());
         if (usersList.isPresent())
             throw new Exception("UsernameDuplicate");
-        if (users.getPassword().length() < 8)
+        if (usersModel.getPassword().length() < 8)
             throw new Exception("PasswordLengthMustBeMore8Char");
     }
 }

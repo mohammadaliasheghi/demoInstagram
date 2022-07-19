@@ -1,24 +1,23 @@
 package com.google.demoinstagram.service;
 
-import com.google.demoinstagram.entity.Users;
+import com.google.demoinstagram.model.UsersModel;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UsersService {
 
     @Transactional
-    Users saveUser(Users users) throws Exception;
+    UsersModel saveUser(UsersModel usersModel) throws Exception;
 
-    List<Users> getAllUser();
+    List<UsersModel> getAllUser();
 
-    Users getUserById(long id);
+    UsersModel getUserById(Long id);
 
     @Transactional
-    Users updateUser(Users users, long id) throws Exception;
+    UsersModel updateUser(UsersModel updateModel, Long id) throws Exception;
 
-    void deleteUser(long id);
+    void deleteUser(Long id);
 
-    Optional<Users> findByUsername(String name);
+    UsersModel findByUsername(String name);
 }
