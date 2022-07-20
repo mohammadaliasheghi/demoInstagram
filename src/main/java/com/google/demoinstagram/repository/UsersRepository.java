@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
     //used in validator and service
-    @Query("select u from Users u where upper(u.username) = upper(:username)")
+    @Query("SELECT u FROM Users u WHERE UPPER(u.username) LIKE UPPER(:username)")
     Optional<Users> findByUsername(@Param("username") String username);
 }

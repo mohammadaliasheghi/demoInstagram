@@ -9,11 +9,13 @@ import com.google.demoinstagram.model.UsersModel;
 import com.google.demoinstagram.repository.UsersRepository;
 import com.google.demoinstagram.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -31,8 +33,10 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UsersModel> getAllUser() {
-        return usersMapper.convertToModels(usersRepository.findAll());
+    public Page<UsersModel> getAllUser(Pageable pageable) {
+        Page<Users> usersPage = usersRepository.findAll(pageable);
+        List<UsersModel> usersModels = usersMapper.convertToModels(usersPage.getContent());
+        return new PageImpl<>(usersModels, pageable, usersModels.size());
     }
 
     @Override
@@ -62,16 +66,5 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Users", "id", id));
         usersRepository.deleteById(id);
-    }
-
-    @Override
-    public UsersModel findByUsername(String name) {
-        Optional<Users> users = usersRepository.findByUsername(name);
-        UsersModel usersModel = new UsersModel();
-        users.ifPresent(value -> {
-            usersModel.setUsername(value.getUsername());
-            usersModel.setEmail(value.getEmail());
-        });
-        return usersModel;
     }
 }

@@ -3,11 +3,12 @@ package com.google.demoinstagram.restController;
 import com.google.demoinstagram.model.UsersModel;
 import com.google.demoinstagram.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -28,20 +29,14 @@ public class UsersRestController {
 
     // http://localhost:8085/demoInstagram/api/users/
     @GetMapping(value = {"/", ""})
-    public List<UsersModel> getAllUser() {
-        return usersService.getAllUser();
+    public Page<UsersModel> getAllUser(@PageableDefault(size = 3) Pageable pageable) {
+        return usersService.getAllUser(pageable);
     }
 
     // http://localhost:8085/demoInstagram/api/users/getUserById/1
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<UsersModel> getUserById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(usersService.getUserById(id), HttpStatus.OK);
-    }
-
-    //http://localhost:8085/demoInstagram/api/users/getUserByUsername/username
-    @GetMapping("/getUserByUsername/{username}")
-    public ResponseEntity<UsersModel> getUserByUsername(@PathVariable("username") String name) {
-        return new ResponseEntity<>(usersService.findByUsername(name), HttpStatus.OK);
     }
 
     // http://localhost:8085/demoInstagram/api/users/update/1
@@ -54,11 +49,8 @@ public class UsersRestController {
     // http://localhost:8085/demoInstagram/api/users/delete/1
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
-
         // delete user from DB
         usersService.deleteUser(id);
-
         return new ResponseEntity<>("User Deleted Successfully!", HttpStatus.OK);
     }
-
 }
