@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 @RestController
 @RequestMapping(value = "/api/users")
 public class UsersRestController {
@@ -29,8 +31,8 @@ public class UsersRestController {
 
     // http://localhost:8085/demoInstagram/api/users/
     @GetMapping(value = {"/", ""})
-    public Page<UsersModel> getAllUser(@PageableDefault(size = 3) Pageable pageable) {
-        return usersService.getAllUser(pageable);
+    public Page<UsersModel> getAllUser(@RequestBody UsersModel usersModel, @PageableDefault(size = 3) Pageable pageable) throws SQLException {
+        return usersService.getAllUser(usersModel, pageable);
     }
 
     // http://localhost:8085/demoInstagram/api/users/getUserById/1
