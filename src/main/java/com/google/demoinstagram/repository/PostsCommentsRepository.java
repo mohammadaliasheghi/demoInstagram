@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PostsCommentsRepository extends JpaRepository<PostsComments, Long> {
 
-    List<PostsComments> getAllByPostsId_Id(Long postsId);
+    List<PostsComments> getAllByPosts_Id(Long postsId);
 
-    Long countAllByPostsId_Id(Long id);
+    Long countAllByPosts_Id(Long id);
 }

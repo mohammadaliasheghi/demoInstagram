@@ -2,6 +2,7 @@ package com.google.demoinstagram.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.demoinstagram.enums.DataStateEnum;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -35,14 +36,14 @@ public class PostsComments {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
-    private Users usersId;
+    private Users users;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
-    private Posts postsId;
+    private Posts posts;
 
-    @OneToMany(mappedBy = "postsCommentsId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "postsComments", cascade = CascadeType.ALL)
     private List<LikeComments> likeComments;
 
     @Column(name = "CREATE_DATE", updatable = false)
@@ -52,4 +53,8 @@ public class PostsComments {
     @Column(name = "UPDATE_DATE")
     @UpdateTimestamp
     private Date updateDate;
+
+    @NotNull
+    @Column(name = "DATA_STATE", length = 3, nullable = false)
+    private Integer dataState = DataStateEnum.ZERO.getValue();
 }

@@ -22,24 +22,24 @@ public class LikeCommentsServiceImpl implements LikeCommentsService {
     @Transactional
     @Override
     public LikeComments createLikeComment(LikeComments likeComments) {
-        if (likeCommentsRepository.existsLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(likeComments.getPostsCommentsId().getId(),
-                likeComments.getUsersId().getId(), likeComments.getPostsId().getId())) {
-            LikeComments newLikePosts = likeCommentsRepository.getLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(likeComments.getPostsCommentsId().getId(),
-                    likeComments.getUsersId().getId(), likeComments.getPostsId().getId());
+        if (likeCommentsRepository.existsLikeCommentsByPostsComments_IdAndUsers_IdAndPosts_Id(likeComments.getPostsComments().getId(),
+                likeComments.getUsers().getId(), likeComments.getPosts().getId())) {
+            LikeComments newLikePosts = likeCommentsRepository.getLikeCommentsByPostsComments_IdAndUsers_IdAndPosts_Id(likeComments.getPostsComments().getId(),
+                    likeComments.getUsers().getId(), likeComments.getPosts().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
                 this.delete(newLikePosts.getId());
-                PostsComments postsComments = postsCommentsService.getComment(likeComments.getPostsCommentsId().getId());
+                PostsComments postsComments = postsCommentsService.getComment(likeComments.getPostsComments().getId());
                 Long countLikeComment = postsComments.getCountLikeComment() - 1;
                 postsComments.setCountLikeComment(countLikeComment);
-                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsCommentsId().getId());
+                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsComments().getId());
             }
         } else {
             if (likeComments.getLiked().equals(true)) {
                 LikeComments saveLikeComment = likeCommentsRepository.save(likeComments);
-                PostsComments postsComments = postsCommentsService.getComment(likeComments.getPostsCommentsId().getId());
+                PostsComments postsComments = postsCommentsService.getComment(likeComments.getPostsComments().getId());
                 Long countLikeComment = postsComments.getCountLikeComment() + 1;
                 postsComments.setCountLikeComment(countLikeComment);
-                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsCommentsId().getId());
+                postsCommentsService.updateCountLikeComment(postsComments, likeComments.getPostsComments().getId());
                 return saveLikeComment;
             } else
                 return null;

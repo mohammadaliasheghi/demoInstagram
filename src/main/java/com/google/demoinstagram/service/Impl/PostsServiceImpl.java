@@ -130,15 +130,15 @@ public class PostsServiceImpl implements PostsService {
     @Override
     public void savedPost(Long postId, Boolean saved) {
         Posts posts = this.getPost(postId);
-        Users users = usersRepository.getById(posts.getUsersId().getId());
+        Users users = usersRepository.getById(posts.getUsers().getId());
         if (saved.equals(true)) {
             SavedPosts savedPosts = new SavedPosts();
-            savedPosts.setPostsId(posts);
-            savedPosts.setUsersId(users);
+            savedPosts.setPosts(posts);
+            savedPosts.setUsers(users);
             savedPosts.setSaved(true);
             savedPostsRepository.save(savedPosts);
         } else {
-            SavedPosts savedPosts = savedPostsRepository.getSavedPostsByUsersId_IdAndPostsId_Id(postId, users.getId());
+            SavedPosts savedPosts = savedPostsRepository.getSavedPostsByUsers_IdAndPosts_Id(postId, users.getId());
             if (savedPosts.getSaved())
                 savedPostsRepository.deleteById(savedPosts.getId());
         }

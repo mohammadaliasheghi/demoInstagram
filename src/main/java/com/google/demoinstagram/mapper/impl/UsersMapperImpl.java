@@ -26,6 +26,7 @@ public class UsersMapperImpl implements UsersMapper {
         usersModel.setPassword(users.getPassword());
         usersModel.setEmail(users.getEmail());
         usersModel.setNumber(users.getNumber());
+        usersModel.setDataState(users.getDataState());
         usersModel.setCreateDate(users.getCreateDate());
         usersModel.setUpdateDate(users.getUpdateDate());
         return usersModel;

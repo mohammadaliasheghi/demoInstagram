@@ -8,25 +8,24 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class UsersModel {
+public class PostsModel {
 
     private Long id;
-    private String username;
-    private String password;
-    private String email;
-    private String number;
+    private String title;
+    private String description;
     private String cover;
+    private Long countLike = 0L;
+    private Long countComment = 0L;
+    private Boolean isSavedPost = false;
     private Date createDate;
     private Date updateDate;
+    private UsersModel usersModel;
     private Integer dataState = DataStateEnum.ZERO.getValue();
-
-    private List<Posts> posts;
+    private List<HashTag> hashTags;
     private List<LikePosts> likePosts;
     private List<PostsComments> postsComments;
     private List<LikeComments> likeComments;
     private List<SavedPosts> savedPosts;
-    private List<FollowUsers> followers;
-    private List<FollowUsers> followings;
-    private List<PrivateMessage> sendUsers;
-    private List<PrivateMessage> receiveUser;
+
+    private Long usersId;
 }

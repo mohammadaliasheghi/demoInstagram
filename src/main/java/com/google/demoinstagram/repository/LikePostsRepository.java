@@ -11,16 +11,16 @@ import java.util.List;
 @Repository
 public interface LikePostsRepository extends JpaRepository<LikePosts, Long> {
 
-    boolean existsLikePostsByUsersId_IdAndPostsId_Id(Long usersId, Long postsId);
+    boolean existsLikePostsByUsers_IdAndPosts_Id(Long usersId, Long postsId);
 
-    LikePosts getLikePostsByUsersId_IdAndPostsId_Id(Long usersId, Long postsId);
+    LikePosts getLikePostsByUsers_IdAndPosts_Id(Long usersId, Long postsId);
 
-    List<LikePosts> getAllByPostsId_Id(Long postsId);
+    List<LikePosts> getAllByPosts_Id(Long postsId);
 
-    Long countAllByPostsId_Id(Long postsId);
+    Long countAllByPosts_Id(Long postsId);
 
-    @Query("select lp.usersId.username from LikePosts lp " +
-            "left join Posts p on p.id = lp.postsId.id " +
+    @Query("select lp.users.username from LikePosts lp " +
+            "left join Posts p on p.id = lp.posts.id " +
             "where p.id = :id")
     List<String> findAllUsernameLikedPostByPostId(@Param("id") Long id);
 }

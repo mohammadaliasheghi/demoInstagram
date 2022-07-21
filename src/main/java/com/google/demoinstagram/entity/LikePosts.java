@@ -28,12 +28,12 @@ public class LikePosts {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
-    private Users usersId;
+    private Users users;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
-    private Posts postsId;
+    private Posts posts;
 
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp

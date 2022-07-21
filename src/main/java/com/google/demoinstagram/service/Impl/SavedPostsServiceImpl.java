@@ -19,8 +19,8 @@ public class SavedPostsServiceImpl implements SavedPostsService {
     @Transactional
     @Override
     public SavedPosts addSavedPost(SavedPosts savedPosts) {
-        if (savedPostsRepository.existsSavedPostsByUsersId_IdAndPostsId_Id(savedPosts.getUsersId().getId(), savedPosts.getPostsId().getId())) {
-            SavedPosts newSavedPosts = savedPostsRepository.getSavedPostsByUsersId_IdAndPostsId_Id(savedPosts.getUsersId().getId(), savedPosts.getPostsId().getId());
+        if (savedPostsRepository.existsSavedPostsByUsers_IdAndPosts_Id(savedPosts.getUsers().getId(), savedPosts.getPosts().getId())) {
+            SavedPosts newSavedPosts = savedPostsRepository.getSavedPostsByUsers_IdAndPosts_Id(savedPosts.getUsers().getId(), savedPosts.getPosts().getId());
             if (newSavedPosts != null && newSavedPosts.getId() != null) {
                 this.deleteSavedPost(newSavedPosts.getId());
             }
@@ -59,11 +59,11 @@ public class SavedPostsServiceImpl implements SavedPostsService {
 
     @Override
     public Long countSavedPostByUsersId(Long usersId) {
-        return savedPostsRepository.countByUsersId_Id(usersId);
+        return savedPostsRepository.countByUsers_Id(usersId);
     }
 
     @Override
     public List<SavedPosts> getAllSavedPostByUsersId(Long usersId) {
-        return savedPostsRepository.getAllByUsersId_Id(usersId);
+        return savedPostsRepository.getAllByUsers_Id(usersId);
     }
 }

@@ -1,7 +1,8 @@
 package com.google.demoinstagram.service.Impl;
 
-import com.google.demoinstagram.config.Constant;
+import com.google.demoinstagram.baseData.Constant;
 import com.google.demoinstagram.entity.Users;
+import com.google.demoinstagram.enums.DataStateEnum;
 import com.google.demoinstagram.excption.ResourceNotFoundException;
 import com.google.demoinstagram.excption.service.UsersValidator;
 import com.google.demoinstagram.mapper.UsersMapper;
@@ -27,10 +28,10 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService {
 
     public static UsersMapper usersMapper = new UsersMapperImpl();
-
-    private EntityManager em;
     private final UsersRepository usersRepository;
     private final UsersValidator usersValidator;
+
+    private EntityManager em;
 
     @Autowired
     public void setEm(EntityManager em) {
@@ -51,13 +52,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     private int count(UsersModel usersModel) {
-        StringBuilder strQuery = new StringBuilder("SELECT COUNT(*) FROM users WHERE (1=1) ");
+        StringBuilder strQuery = new StringBuilder("SELECT COUNT(*) FROM users WHERE (1=1) AND data_state = 0 ");
         addFilters(usersModel, strQuery);
         return Math.toIntExact(Long.parseLong(em.createNativeQuery(strQuery.toString()).getSingleResult().toString()));
     }
 
     private List<Users> list(UsersModel usersModel, Pageable pageable) {
-        StringBuilder strQuery = new StringBuilder("SELECT * FROM users WHERE (1=1) ");
+        StringBuilder strQuery = new StringBuilder("SELECT * FROM users WHERE (1=1) AND data_state = 0 ");
         addFilters(usersModel, strQuery);
         strQuery.append(Constant.LIMIT).append(Constant.PREFIX).append(pageable.getPageSize()).append(Constant.PREFIX);
         List<Object[]> objectList = em.createNativeQuery(strQuery.toString()).getResultList();
@@ -67,11 +68,12 @@ public class UsersServiceImpl implements UsersService {
             newUser.setId(Long.valueOf(String.valueOf(objects[0])));
             newUser.setCover((String) objects[1]);
             newUser.setCreateDate((Date) objects[2]);
-            newUser.setEmail((String) objects[3]);
-            newUser.setNumber((String) objects[4]);
-            newUser.setPassword((String) objects[5]);
-            newUser.setUpdateDate((Date) objects[6]);
-            newUser.setUsername((String) objects[7]);
+            newUser.setDataState((Integer) objects[3]);
+            newUser.setEmail((String) objects[4]);
+            newUser.setNumber((String) objects[5]);
+            newUser.setPassword((String) objects[6]);
+            newUser.setUpdateDate((Date) objects[7]);
+            newUser.setUsername((String) objects[8]);
             users.add(newUser);
         }
         return users;
@@ -89,7 +91,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersModel getUserById(Long id) {
-        return usersMapper.convertToModel(usersRepository.findById(id).orElseThrow(() ->
+        return usersMapper.convertToModel(usersRepository.find(id).orElseThrow(() ->
                 new ResourceNotFoundException("Users", "id", id)));
     }
 
@@ -111,8 +113,9 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void deleteUser(Long id) {
         // check whether a User exist in a DB or not
-        usersRepository.findById(id).orElseThrow(() ->
+        Users updateDataState = usersRepository.find(id).orElseThrow(() ->
                 new ResourceNotFoundException("Users", "id", id));
-        usersRepository.deleteById(id);
+        updateDataState.setDataState(DataStateEnum.HUNDRED.getValue());
+        usersRepository.save(updateDataState);
     }
 }

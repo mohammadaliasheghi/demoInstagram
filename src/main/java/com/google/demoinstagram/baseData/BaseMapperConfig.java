@@ -1,4 +1,4 @@
-package com.google.demoinstagram.config;
+package com.google.demoinstagram.baseData;
 
 import java.io.Serializable;
 import java.util.ArrayList;

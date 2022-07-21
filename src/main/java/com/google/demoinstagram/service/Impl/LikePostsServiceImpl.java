@@ -20,21 +20,21 @@ public class LikePostsServiceImpl implements LikePostsService {
 
     @Override
     public LikePosts createLikePost(LikePosts likePosts) {
-        if (likePostsRepository.existsLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId())) {
-            LikePosts newLikePosts = likePostsRepository.getLikePostsByUsersId_IdAndPostsId_Id(likePosts.getUsersId().getId(), likePosts.getPostsId().getId());
+        if (likePostsRepository.existsLikePostsByUsers_IdAndPosts_Id(likePosts.getUsers().getId(), likePosts.getPosts().getId())) {
+            LikePosts newLikePosts = likePostsRepository.getLikePostsByUsers_IdAndPosts_Id(likePosts.getUsers().getId(), likePosts.getPosts().getId());
             if (newLikePosts != null && newLikePosts.getId() != null) {
-                Posts posts = postsService.getPost(likePosts.getPostsId().getId());
+                Posts posts = postsService.getPost(likePosts.getPosts().getId());
                 Long countLikePosts = posts.getCountLike() - 1;
                 posts.setCountLike(countLikePosts);
-                postsService.updateCountLike(posts, likePosts.getPostsId().getId());
+                postsService.updateCountLike(posts, likePosts.getPosts().getId());
                 this.delete(newLikePosts.getId());
             }
         } else {
             if (likePosts.getLiked().equals(true)) {
-                Posts posts = postsService.getPost(likePosts.getPostsId().getId());
+                Posts posts = postsService.getPost(likePosts.getPosts().getId());
                 Long countLikePosts = posts.getCountLike() + 1;
                 posts.setCountLike(countLikePosts);
-                postsService.updateCountLike(posts, likePosts.getPostsId().getId());
+                postsService.updateCountLike(posts, likePosts.getPosts().getId());
                 return likePostsRepository.save(likePosts);
             } else
                 return null;
@@ -54,14 +54,14 @@ public class LikePostsServiceImpl implements LikePostsService {
     public List<LikePosts> listInfoUsersLikedPost(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");
-        return likePostsRepository.getAllByPostsId_Id(postId);
+        return likePostsRepository.getAllByPosts_Id(postId);
     }
 
     @Override
     public Long countAllLikeByPostsId(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");
-        return likePostsRepository.countAllByPostsId_Id(postId);
+        return likePostsRepository.countAllByPosts_Id(postId);
     }
 
     @Override

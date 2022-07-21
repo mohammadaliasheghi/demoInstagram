@@ -1,4 +1,4 @@
-package com.google.demoinstagram.config;
+package com.google.demoinstagram.baseData;
 
 public class Constant {
     public static String AND = " AND ";

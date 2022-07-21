@@ -28,17 +28,17 @@ public class LikeComments {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "USERS_ID")
-    private Users usersId;
+    private Users users;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_ID")
-    private Posts postsId;
+    private Posts posts;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "POSTS_COMMENTS_ID")
-    private PostsComments postsCommentsId;
+    private PostsComments postsComments;
 
     @Column(name = "CREATE_DATE", updatable = false)
     @CreationTimestamp

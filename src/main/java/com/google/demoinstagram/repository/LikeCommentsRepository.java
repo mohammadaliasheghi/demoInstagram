@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface LikeCommentsRepository extends JpaRepository<LikeComments, Long> {
 
-    boolean existsLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(Long postsComments, Long users, Long posts);
+    boolean existsLikeCommentsByPostsComments_IdAndUsers_IdAndPosts_Id(Long postsComments, Long users, Long posts);
 
-    LikeComments getLikeCommentsByPostsCommentsId_IdAndUsersId_IdAndPostsId_Id(Long postsCommentsId, Long usersId, Long postsId);
+    LikeComments getLikeCommentsByPostsComments_IdAndUsers_IdAndPosts_Id(Long postsCommentsId, Long usersId, Long postsId);
 
     Long countAllByPostsCommentsId_Id(Long postsCommentsId);
 
-    @Query("select lc.usersId.username from LikeComments lc " +
-            "left join PostsComments pc on pc.id = lc.postsCommentsId.id " +
+    @Query("select lc.users.username from LikeComments lc " +
+            "left join PostsComments pc on pc.id = lc.postsComments.id " +
             "where pc.id = :id")
     List<String> findAllUsernameLikedCommentsByPostCommentId(@Param("id") Long id);
 }

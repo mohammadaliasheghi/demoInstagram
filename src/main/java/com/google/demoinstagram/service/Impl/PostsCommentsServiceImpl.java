@@ -22,10 +22,10 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
     @Transactional
     @Override
     public PostsComments addComment(PostsComments postsComments) {
-        Posts posts = postsService.getPost(postsComments.getPostsId().getId());
+        Posts posts = postsService.getPost(postsComments.getPosts().getId());
         Long countComment = posts.getCountComment() + 1;
         posts.setCountComment(countComment);
-        postsService.updateCountComment(posts, postsComments.getPostsId().getId());
+        postsService.updateCountComment(posts, postsComments.getPosts().getId());
         return postsCommentsRepository.save(postsComments);
     }
 
@@ -36,8 +36,8 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
                 () -> new ResourceNotFoundException("PostsComments", "id", id));
 
         existPostsComments.setText(postsComments.getText());
-        existPostsComments.setUsersId(postsComments.getUsersId());
-        existPostsComments.setPostsId(postsComments.getPostsId());
+        existPostsComments.setUsers(postsComments.getUsers());
+        existPostsComments.setPosts(postsComments.getPosts());
 
         postsCommentsRepository.save(existPostsComments);
         return existPostsComments;
@@ -57,10 +57,10 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
         PostsComments postsComments = postsCommentsRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("postsComments", "id", id));
         postsCommentsRepository.deleteById(id);
-        Posts posts = postsService.getPost(postsComments.getPostsId().getId());
+        Posts posts = postsService.getPost(postsComments.getPosts().getId());
         Long countComment = posts.getCountComment() - 1;
         posts.setCountComment(countComment);
-        postsService.updateCountComment(posts, postsComments.getPostsId().getId());
+        postsService.updateCountComment(posts, postsComments.getPosts().getId());
     }
 
     @Override
@@ -78,13 +78,13 @@ public class PostsCommentsServiceImpl implements PostsCommentsService {
     public List<PostsComments> listInfoCommentPostByPostsId(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");
-        return postsCommentsRepository.getAllByPostsId_Id(postId);
+        return postsCommentsRepository.getAllByPosts_Id(postId);
     }
 
     @Override
     public Long countAllCommentByPostsId(Long postId) throws Exception {
         if (postId == null)
             throw new Exception("PostsIdCannotBeNull");
-        return postsCommentsRepository.countAllByPostsId_Id(postId);
+        return postsCommentsRepository.countAllByPosts_Id(postId);
     }
 }

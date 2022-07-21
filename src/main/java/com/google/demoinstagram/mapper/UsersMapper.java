@@ -1,6 +1,6 @@
 package com.google.demoinstagram.mapper;
 
-import com.google.demoinstagram.config.BaseMapperConfig;
+import com.google.demoinstagram.baseData.BaseMapperConfig;
 import com.google.demoinstagram.entity.Users;
 import com.google.demoinstagram.model.UsersModel;
 import org.mapstruct.Mapper;
