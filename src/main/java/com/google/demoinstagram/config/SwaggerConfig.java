@@ -27,7 +27,7 @@ public class SwaggerConfig {
         log.info("Swagger started successfully!");
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.google"))
+                .apis(RequestHandlerSelectors.basePackage("com.google.demoinstagram.restController"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metadata());
